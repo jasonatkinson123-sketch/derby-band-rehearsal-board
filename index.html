@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11172f">
+  <meta name="description" content="Today's rehearsal plan for the 6th, 7th, and 8th grade bands.">
+  <title>Today's Band Rehearsals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%2311172f'/%3E%3Cpath fill='%23ffd447' d='M7 7h17v4H11v3h10v4H11v7H7z'/%3E%3Crect x='22' y='14' width='4' height='7' fill='%23ff5d8f'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <main>
+    <header class="topbar">
+      <div class="brand-lockup">
+        <div class="pixel-note" aria-hidden="true">♪</div>
+        <div>
+          <p class="eyebrow">DERBY MIDDLE SCHOOL</p>
+          <h1>TODAY'S REHEARSALS</h1>
+        </div>
+      </div>
+      <div class="date-lockup">
+        <p id="weekday">MONDAY</p>
+        <p id="full-date">SEPTEMBER 22</p>
+      </div>
+    </header>
+
+    <section class="boards" aria-label="Band rehearsal plans">
+      <article class="grade-card grade-6" data-grade="6">
+        <header>
+          <span class="grade-number">6</span>
+          <div>
+            <p>TH</p>
+            <h2>GRADE BAND</h2>
+          </div>
+          <span class="status-light" aria-label="Ready"></span>
+        </header>
+        <ol class="set-list" id="list-6"></ol>
+        <div class="empty-state" id="empty-6">
+          <span>★</span>
+          <p>READY FOR TODAY'S MUSIC</p>
+        </div>
+        <footer><span>PLAYER 1</span><span id="count-6">0 PIECES</span></footer>
+      </article>
+
+      <article class="grade-card grade-7" data-grade="7">
+        <header>
+          <span class="grade-number">7</span>
+          <div>
+            <p>TH</p>
+            <h2>GRADE BAND</h2>
+          </div>
+          <span class="status-light" aria-label="Ready"></span>
+        </header>
+        <ol class="set-list" id="list-7"></ol>
+        <div class="empty-state" id="empty-7">
+          <span>★</span>
+          <p>READY FOR TODAY'S MUSIC</p>
+        </div>
+        <footer><span>PLAYER 2</span><span id="count-7">0 PIECES</span></footer>
+      </article>
+
+      <article class="grade-card grade-8" data-grade="8">
+        <header>
+          <span class="grade-number">8</span>
+          <div>
+            <p>TH</p>
+            <h2>GRADE BAND</h2>
+          </div>
+          <span class="status-light" aria-label="Ready"></span>
+        </header>
+        <ol class="set-list" id="list-8"></ol>
+        <div class="empty-state" id="empty-8">
+          <span>★</span>
+          <p>READY FOR TODAY'S MUSIC</p>
+        </div>
+        <footer><span>PLAYER 3</span><span id="count-8">0 PIECES</span></footer>
+      </article>
+    </section>
+
+    <div class="bottom-bar">
+      <p><span class="blink">▶</span> LISTEN • COUNT • PLAY</p>
+      <button id="edit-button" type="button" aria-expanded="false" aria-controls="editor">EDIT TODAY</button>
+    </div>
+  </main>
+
+  <dialog id="editor">
+    <form method="dialog" id="editor-form">
+      <header class="editor-header">
+        <div>
+          <p class="eyebrow">TEACHER CONTROLS</p>
+          <h2>BUILD TODAY'S LISTS</h2>
+        </div>
+        <button class="icon-button" value="cancel" aria-label="Close editor">×</button>
+      </header>
+      <p class="editor-help">Enter one rehearsal item per line. Add measures, warm-ups, or notes naturally.</p>
+      <div class="editor-grid">
+        <label>
+          <span>6TH GRADE</span>
+          <textarea id="edit-6" rows="8" placeholder="B-flat scale&#10;Dragonslayer — mm. 1–54&#10;Jester Dance"></textarea>
+        </label>
+        <label>
+          <span>7TH GRADE</span>
+          <textarea id="edit-7" rows="8" placeholder="Midnight Madness&#10;Falcon's Flight"></textarea>
+        </label>
+        <label>
+          <span>8TH GRADE</span>
+          <textarea id="edit-8" rows="8" placeholder="Tuning&#10;Shine&#10;Star Wars"></textarea>
+        </label>
+      </div>
+      <div class="editor-actions">
+        <button type="button" class="danger-button" id="clear-button">CLEAR ALL</button>
+        <button type="submit" value="save" class="save-button">SAVE &amp; DISPLAY</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
