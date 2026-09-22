@@ -84,40 +84,9 @@
 
     <div class="bottom-bar">
       <p><span class="blink">▶</span> LISTEN • COUNT • PLAY</p>
-      <button id="edit-button" type="button" aria-expanded="false" aria-controls="editor">EDIT TODAY</button>
+      <p class="live-status" id="live-status"><span></span> CHECKING TODAY'S LISTS</p>
     </div>
   </main>
-
-  <dialog id="editor">
-    <form method="dialog" id="editor-form">
-      <header class="editor-header">
-        <div>
-          <p class="eyebrow">TEACHER CONTROLS</p>
-          <h2>BUILD TODAY'S LISTS</h2>
-        </div>
-        <button class="icon-button" value="cancel" aria-label="Close editor">×</button>
-      </header>
-      <p class="editor-help">Enter one rehearsal item per line. Add measures, warm-ups, or notes naturally.</p>
-      <div class="editor-grid">
-        <label>
-          <span>6TH GRADE</span>
-          <textarea id="edit-6" rows="8" placeholder="B-flat scale&#10;Dragonslayer — mm. 1–54&#10;Jester Dance"></textarea>
-        </label>
-        <label>
-          <span>7TH GRADE</span>
-          <textarea id="edit-7" rows="8" placeholder="Midnight Madness&#10;Falcon's Flight"></textarea>
-        </label>
-        <label>
-          <span>8TH GRADE</span>
-          <textarea id="edit-8" rows="8" placeholder="Tuning&#10;Shine&#10;Star Wars"></textarea>
-        </label>
-      </div>
-      <div class="editor-actions">
-        <button type="button" class="danger-button" id="clear-button">CLEAR ALL</button>
-        <button type="submit" value="save" class="save-button">SAVE &amp; DISPLAY</button>
-      </div>
-    </form>
-  </dialog>
 
   <script src="app.js"></script>
 </body>

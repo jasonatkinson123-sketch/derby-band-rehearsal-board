@@ -1,39 +1,23 @@
-const STORAGE_KEY = "derby-band-rehearsals-v1";
+const DATA_URL = "rehearsals.json";
+const REFRESH_INTERVAL = 30000;
 const grades = ["6", "7", "8"];
 
-const todayKey = () => {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-};
-
-const blankState = () => ({
-  date: todayKey(),
+let state = {
+  date: "",
   lists: { "6": [], "7": [], "8": [] }
-});
-
-function loadBoardState() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (!saved || !saved.lists) return blankState();
-    return {
-      date: saved.date || todayKey(),
-      lists: Object.fromEntries(grades.map(grade => [grade, Array.isArray(saved.lists[grade]) ? saved.lists[grade] : []]))
-    };
-  } catch {
-    return blankState();
-  }
-}
-
-function saveBoardState(state) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
-
-let state = loadBoardState();
+};
 
 function formatDate() {
   const now = new Date();
   document.querySelector("#weekday").textContent = now.toLocaleDateString("en-US", { weekday: "long" }).toUpperCase();
   document.querySelector("#full-date").textContent = now.toLocaleDateString("en-US", { month: "long", day: "numeric" }).toUpperCase();
+}
+
+function normalizedLists(data) {
+  return Object.fromEntries(grades.map(grade => [
+    grade,
+    Array.isArray(data?.lists?.[grade]) ? data.lists[grade].filter(item => typeof item === "string" && item.trim()) : []
+  ]));
 }
 
 function render() {
@@ -55,46 +39,27 @@ function render() {
   });
 }
 
-function populateEditor() {
-  grades.forEach(grade => {
-    document.querySelector(`#edit-${grade}`).value = state.lists[grade].join("\n");
-  });
+function setStatus(message, online) {
+  const status = document.querySelector("#live-status");
+  status.lastChild.textContent = ` ${message}`;
+  status.classList.toggle("is-online", online);
 }
 
-function parseLines(value) {
-  return value.split("\n").map(line => line.trim()).filter(Boolean);
+async function refreshBoard() {
+  try {
+    const response = await fetch(`${DATA_URL}?v=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) throw new Error(`Unable to load rehearsal data (${response.status})`);
+    const data = await response.json();
+    state = { date: data.date || "", lists: normalizedLists(data) };
+    render();
+    setStatus("LIVE • AUTO REFRESH", true);
+  } catch (error) {
+    console.error(error);
+    setStatus("RETRYING CONNECTION", false);
+  }
 }
-
-const editor = document.querySelector("#editor");
-const editButton = document.querySelector("#edit-button");
-
-editButton.addEventListener("click", () => {
-  populateEditor();
-  editor.showModal();
-  editButton.setAttribute("aria-expanded", "true");
-});
-
-editor.addEventListener("close", () => editButton.setAttribute("aria-expanded", "false"));
-
-document.querySelector("#editor-form").addEventListener("submit", event => {
-  if (event.submitter?.value !== "save") return;
-  event.preventDefault();
-  state = {
-    date: todayKey(),
-    lists: Object.fromEntries(grades.map(grade => [grade, parseLines(document.querySelector(`#edit-${grade}`).value)]))
-  };
-  saveBoardState(state);
-  render();
-  editor.close("save");
-});
-
-document.querySelector("#clear-button").addEventListener("click", () => {
-  grades.forEach(grade => { document.querySelector(`#edit-${grade}`).value = ""; });
-});
-
-editor.addEventListener("click", event => {
-  if (event.target === editor) editor.close("cancel");
-});
 
 formatDate();
 render();
+refreshBoard();
+setInterval(refreshBoard, REFRESH_INTERVAL);
