@@ -1,19 +1,28 @@
 {
-  "date": "2026-09-22",
+  "date": "2026-09-23",
   "lists": {
     "6": [
-      "B-flat scale",
-      "Dragonslayer — measures 1–54",
-      "Jester Dance"
+      "Master Note",
+      "Beginner",
+      "Power",
+      "Jester",
+      "Dragon",
+      "Alpha"
     ],
     "7": [
-      "Midnight Madness",
-      "Falcon’s Flight"
+      "Master Note",
+      "Haunted House Warm-Ups",
+      "Beginner",
+      "Valiance",
+      "Engines of Resistance",
+      "Mechanical"
     ],
     "8": [
-      "Tuning",
-      "Shine",
-      "Star Wars"
+      "Master Note",
+      "Beginner",
+      "Jester",
+      "Alpha",
+      "Snakebite"
     ]
   }
 }
