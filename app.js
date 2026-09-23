@@ -59,6 +59,40 @@ async function refreshBoard() {
   }
 }
 
+
+const routineOverlay = document.querySelector("#routine-overlay");
+const routineOverlayNumber = document.querySelector("#routine-overlay-number");
+const routineOverlayLabel = document.querySelector("#routine-overlay-label");
+const routineClose = document.querySelector("#routine-close");
+const routineSteps = document.querySelectorAll(".routine-step");
+
+const routineAccents = {
+  yellow: "var(--yellow)",
+  red: "#e32f3f",
+  pink: "var(--pink)",
+  cyan: "var(--cyan)"
+};
+
+function openRoutine(stepButton) {
+  routineOverlayNumber.textContent = stepButton.dataset.step || "";
+  routineOverlayLabel.textContent = stepButton.dataset.label || "";
+  routineOverlay.style.setProperty("--routine-accent", routineAccents[stepButton.dataset.accent] || "var(--yellow)");
+  routineOverlay.hidden = false;
+  document.body.classList.add("routine-open");
+  routineClose.focus();
+}
+
+function closeRoutine() {
+  routineOverlay.hidden = true;
+  document.body.classList.remove("routine-open");
+}
+
+routineSteps.forEach(step => step.addEventListener("click", () => openRoutine(step)));
+routineClose.addEventListener("click", closeRoutine);
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && !routineOverlay.hidden) closeRoutine();
+});
+
 formatDate();
 render();
 refreshBoard();
