@@ -122,7 +122,7 @@ const routineOverlay = document.querySelector("#routine-overlay");
 const routineOverlayNumber = document.querySelector("#routine-overlay-number");
 const routineOverlayLabel = document.querySelector("#routine-overlay-label");
 const routineClose = document.querySelector("#routine-close");
-const routineSteps = document.querySelectorAll(".routine-step");
+const routineSteps = document.querySelectorAll(".routine-step, .action-step");
 
 const routineAccents = {
   yellow: "var(--yellow)",
@@ -132,7 +132,9 @@ const routineAccents = {
 };
 
 function openRoutine(stepButton) {
-  routineOverlayNumber.textContent = stepButton.dataset.step || "";
+  const step = stepButton.dataset.step || "";
+  routineOverlayNumber.textContent = step;
+  routineOverlayNumber.classList.toggle("is-hidden", !step);
   routineOverlayLabel.textContent = stepButton.dataset.label || "";
   routineOverlay.style.setProperty("--routine-accent", routineAccents[stepButton.dataset.accent] || "var(--yellow)");
   routineOverlay.hidden = false;
