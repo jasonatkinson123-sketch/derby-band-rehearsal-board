@@ -52,6 +52,7 @@ async function refreshBoard() {
     const data = await response.json();
     state = { date: data.date || "", lists: normalizedLists(data) };
     render();
+    renderGradeOverlay();
     setStatus("LIVE • AUTO REFRESH", true);
   } catch (error) {
     console.error(error);
@@ -59,6 +60,63 @@ async function refreshBoard() {
   }
 }
 
+
+let activeGrade = null;
+
+const gradeOverlay = document.querySelector("#grade-overlay");
+const gradeOverlayNumber = document.querySelector("#grade-overlay-number");
+const gradeOverlayList = document.querySelector("#grade-overlay-list");
+const gradeOverlayEmpty = document.querySelector("#grade-overlay-empty");
+const gradeClose = document.querySelector("#grade-close");
+const gradeCards = document.querySelectorAll(".grade-card");
+
+const gradeAccents = {
+  "6": "var(--yellow)",
+  "7": "var(--pink)",
+  "8": "var(--cyan)"
+};
+
+function renderGradeOverlay() {
+  if (!activeGrade) return;
+  const items = state.lists[activeGrade] || [];
+
+  gradeOverlayNumber.textContent = activeGrade;
+  gradeOverlay.style.setProperty("--grade-accent", gradeAccents[activeGrade] || "var(--yellow)");
+  gradeOverlayList.replaceChildren(...items.map(item => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    return li;
+  }));
+
+  gradeOverlayList.hidden = items.length === 0;
+  gradeOverlayEmpty.hidden = items.length > 0;
+}
+
+function openGrade(card) {
+  activeGrade = card.dataset.grade;
+  renderGradeOverlay();
+  gradeOverlay.hidden = false;
+  document.body.classList.add("routine-open");
+  gradeClose.focus();
+}
+
+function closeGrade() {
+  gradeOverlay.hidden = true;
+  activeGrade = null;
+  document.body.classList.remove("routine-open");
+}
+
+gradeCards.forEach(card => {
+  card.addEventListener("click", () => openGrade(card));
+  card.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openGrade(card);
+    }
+  });
+});
+
+gradeClose.addEventListener("click", closeGrade);
 
 const routineOverlay = document.querySelector("#routine-overlay");
 const routineOverlayNumber = document.querySelector("#routine-overlay-number");
@@ -90,7 +148,9 @@ function closeRoutine() {
 routineSteps.forEach(step => step.addEventListener("click", () => openRoutine(step)));
 routineClose.addEventListener("click", closeRoutine);
 document.addEventListener("keydown", event => {
-  if (event.key === "Escape" && !routineOverlay.hidden) closeRoutine();
+  if (event.key !== "Escape") return;
+  if (!routineOverlay.hidden) closeRoutine();
+  if (!gradeOverlay.hidden) closeGrade();
 });
 
 formatDate();
