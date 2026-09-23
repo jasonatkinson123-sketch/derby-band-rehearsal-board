@@ -71,6 +71,53 @@ h1 { margin: 0; font-family: var(--pixel); font-size: clamp(1.35rem, 3.1vw, 2.8r
 #weekday { color: var(--yellow); font-family: var(--pixel); font-size: clamp(.7rem, 1.2vw, 1rem); }
 #full-date { margin-top: .35rem; font-size: clamp(1.3rem, 2vw, 1.8rem); letter-spacing: .07em; }
 
+.routine-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(.65rem, 1.3vw, 1rem);
+  margin: 0 0 1.7rem;
+}
+
+.routine-step {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  min-height: 4.5rem;
+  padding: .7rem .8rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 4px solid var(--ink);
+  outline: 3px solid var(--cyan);
+  box-shadow: 6px 6px 0 var(--shadow);
+}
+
+.routine-step:nth-child(1) { outline-color: var(--yellow); }
+.routine-step:nth-child(3) { outline-color: var(--pink); }
+.routine-step:nth-child(4) { outline-color: var(--cyan); }
+
+.routine-number {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  flex: 0 0 2.2rem;
+  color: var(--paper);
+  background: var(--blue);
+  border: 3px solid var(--ink);
+  font-family: var(--pixel);
+  font-size: .58rem;
+}
+
+.routine-red .routine-number {
+  background: #e32f3f;
+}
+
+.routine-label {
+  font-family: var(--pixel);
+  font-size: clamp(.52rem, .8vw, .68rem);
+  line-height: 1.45;
+}
+
 .boards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 2rem); }
 .grade-card {
   --accent: var(--yellow);
@@ -141,6 +188,7 @@ textarea:focus { outline: 4px solid var(--cyan); outline-offset: -4px; }
 .save-button:active, .danger-button:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--ink); }
 
 @media (max-width: 900px) {
+  .routine-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .boards { grid-template-columns: 1fr; }
   .grade-card { min-height: 19rem; }
   .editor-grid { grid-template-columns: 1fr; }
@@ -148,6 +196,9 @@ textarea:focus { outline: 4px solid var(--cyan); outline-offset: -4px; }
 
 @media (max-width: 620px) {
   main { padding-top: 1.25rem; }
+  .routine-strip { gap: .55rem; margin-bottom: 1.35rem; }
+  .routine-step { min-height: 4rem; padding: .6rem; box-shadow: 4px 4px 0 var(--shadow); }
+  .routine-label { font-size: .5rem; }
   .topbar { align-items: flex-start; }
   .pixel-note { width: 3.4rem; height: 3.4rem; font-size: 1.5rem; box-shadow: 5px 5px 0 var(--pink); }
   .date-lockup { display: none; }
