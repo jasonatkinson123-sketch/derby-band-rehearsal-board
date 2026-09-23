@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11172f">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="description" content="Today's rehearsal plan for the 6th, 7th, and 8th grade bands.">
+  <title>Today's Band Rehearsals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%2311172f'/%3E%3Cpath fill='%23ffd447' d='M7 7h17v4H11v3h10v4H11v7H7z'/%3E%3Crect x='22' y='14' width='4' height='7' fill='%23ff5d8f'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles-v5.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <main>
+    <header class="topbar">
+      <div class="brand-lockup">
+        <div class="pixel-note" aria-hidden="true">♪</div>
+        <div>
+          <p class="eyebrow">DERBY MIDDLE SCHOOL</p>
+          <h1>TODAY'S REHEARSALS</h1>
+        </div>
+      </div>
+      <div class="date-lockup">
+        <p id="weekday">MONDAY</p>
+        <p id="full-date">SEPTEMBER 22</p>
+      </div>
+    </header>
+
+    <section class="routine-strip" aria-label="Band opening routine">
+      <button class="routine-step" type="button" data-step="01" data-label="ASSIGNED SEAT" data-accent="yellow">
+        <span class="routine-number">01</span>
+        <span class="routine-label">ASSIGNED SEAT</span>
+      </button>
+      <button class="routine-step routine-red" type="button" data-step="02" data-label="RED LIGHT RESET" data-accent="red">
+        <span class="routine-number">02</span>
+        <span class="routine-label">RED LIGHT RESET</span>
+      </button>
+      <button class="routine-step" type="button" data-step="03" data-label="ANNOUNCEMENTS" data-accent="pink">
+        <span class="routine-number">03</span>
+        <span class="routine-label">ANNOUNCEMENTS</span>
+      </button>
+      <button class="routine-step" type="button" data-step="04" data-label="UNPACK + WARM UP" data-accent="cyan">
+        <span class="routine-number">04</span>
+        <span class="routine-label">UNPACK + WARM UP</span>
+      </button>
+    </section>
+
+    <div class="routine-overlay" id="routine-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="routine-overlay-label">
+      <button class="routine-close" id="routine-close" type="button" aria-label="Close routine step">×</button>
+      <div class="routine-overlay-content">
+        <span class="routine-overlay-number" id="routine-overlay-number">01</span>
+        <h2 id="routine-overlay-label">ASSIGNED SEAT</h2>
+      </div>
+    </div>
+
+    <section class="boards" aria-label="Band rehearsal plans">
+      <article class="grade-card grade-6" data-grade="6">
+        <button class="grade-open-button" type="button" data-grade="6" aria-label="Open 6th grade band rehearsal full screen"></button>
+        <header>
+          <span class="grade-number">6</span>
+          <div>
+            <p>TH</p>
+            <h2>GRADE BAND</h2>
+          </div>
+          <span class="status-light" aria-label="Ready"></span>
+        </header>
+        <ol class="set-list" id="list-6"></ol>
+        <div class="empty-state" id="empty-6">
+          <span>★</span>
+          <p>READY FOR TODAY'S MUSIC</p>
+        </div>
+        <footer><span>PLAYER 1</span><span id="count-6">0 PIECES</span></footer>
+      </article>
+
+      <article class="grade-card grade-7" data-grade="7">
+        <button class="grade-open-button" type="button" data-grade="7" aria-label="Open 7th grade band rehearsal full screen"></button>
+        <header>
+          <span class="grade-number">7</span>
+          <div>
+            <p>TH</p>
+            <h2>GRADE BAND</h2>
+          </div>
+          <span class="status-light" aria-label="Ready"></span>
+        </header>
+        <ol class="set-list" id="list-7"></ol>
+        <div class="empty-state" id="empty-7">
+          <span>★</span>
+          <p>READY FOR TODAY'S MUSIC</p>
+        </div>
+        <footer><span>PLAYER 2</span><span id="count-7">0 PIECES</span></footer>
+      </article>
+
+      <article class="grade-card grade-8" data-grade="8">
+        <button class="grade-open-button" type="button" data-grade="8" aria-label="Open 8th grade band rehearsal full screen"></button>
+        <header>
+          <span class="grade-number">8</span>
+          <div>
+            <p>TH</p>
+            <h2>GRADE BAND</h2>
+          </div>
+          <span class="status-light" aria-label="Ready"></span>
+        </header>
+        <ol class="set-list" id="list-8"></ol>
+        <div class="empty-state" id="empty-8">
+          <span>★</span>
+          <p>READY FOR TODAY'S MUSIC</p>
+        </div>
+        <footer><span>PLAYER 3</span><span id="count-8">0 PIECES</span></footer>
+      </article>
+    </section>
+
+    <section class="action-strip" aria-label="Band classroom reminders">
+      <button class="action-step" type="button" data-label="PACK UP" data-accent="yellow">
+        <span class="action-label">PACK UP</span>
+      </button>
+      <button class="action-step" type="button" data-label="INDIVIDUAL PRACTICE TIME" data-accent="cyan">
+        <span class="action-label">INDIVIDUAL PRACTICE TIME</span>
+      </button>
+      <button class="action-step warning-step" type="button" data-label="DO NOT WALK AROUND THE CLASSROOM" data-accent="red">
+        <span class="action-label">DO NOT WALK AROUND THE CLASSROOM</span>
+      </button>
+      <button class="action-step warning-step" type="button" data-label="THIS IS NOT CALM ENERGY" data-accent="red">
+        <span class="action-label">THIS IS NOT CALM ENERGY</span>
+      </button>
+      <button class="action-step" type="button" data-label="CALM ENERGY MEANS SIT ANYWHERE" data-accent="pink">
+        <span class="action-label">CALM ENERGY MEANS SIT ANYWHERE</span>
+      </button>
+      <button class="action-step" type="button" data-label="SIT ANYWHERE. CALM ENERGY ACHIEVED." data-accent="cyan">
+        <span class="action-label">SIT ANYWHERE. CALM ENERGY ACHIEVED.</span>
+      </button>
+    </section>
+
+    <div class="grade-overlay" id="grade-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="grade-overlay-title">
+      <button class="routine-close" id="grade-close" type="button" aria-label="Close enlarged rehearsal">×</button>
+      <div class="grade-overlay-content">
+        <header class="grade-overlay-header">
+          <span class="grade-overlay-number" id="grade-overlay-number">6</span>
+          <div>
+            <p>TH</p>
+            <h2 id="grade-overlay-title">GRADE BAND</h2>
+          </div>
+        </header>
+        <ol class="grade-overlay-list" id="grade-overlay-list"></ol>
+        <div class="grade-overlay-empty" id="grade-overlay-empty" hidden aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <p><span class="blink">▶</span> LISTEN • COUNT • PLAY</p>
+      <p class="live-status" id="live-status"><span></span> CHECKING TODAY'S LISTS</p>
+    </div>
+  </main>
+
+  <script src="app-v6.js"></script>
+</body>
+</html>
