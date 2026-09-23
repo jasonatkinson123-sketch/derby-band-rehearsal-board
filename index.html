@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%2311172f'/%3E%3Cpath fill='%23ffd447' d='M7 7h17v4H11v3h10v4H11v7H7z'/%3E%3Crect x='22' y='14' width='4' height='7' fill='%23ff5d8f'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=20260923-1205">
+  <link rel="stylesheet" href="styles.css?v=20260923-1215">
 </head>
 <body>
   <div class="scanlines" aria-hidden="true"></div>
@@ -57,7 +57,7 @@
     </div>
 
     <section class="boards" aria-label="Band rehearsal plans">
-      <article class="grade-card grade-6" data-grade="6">
+      <article class="grade-card grade-6" data-grade="6" role="button" tabindex="0" aria-label="Enlarge 6th grade band rehearsal">
         <header>
           <span class="grade-number">6</span>
           <div>
@@ -74,7 +74,7 @@
         <footer><span>PLAYER 1</span><span id="count-6">0 PIECES</span></footer>
       </article>
 
-      <article class="grade-card grade-7" data-grade="7">
+      <article class="grade-card grade-7" data-grade="7" role="button" tabindex="0" aria-label="Enlarge 7th grade band rehearsal">
         <header>
           <span class="grade-number">7</span>
           <div>
@@ -91,7 +91,7 @@
         <footer><span>PLAYER 2</span><span id="count-7">0 PIECES</span></footer>
       </article>
 
-      <article class="grade-card grade-8" data-grade="8">
+      <article class="grade-card grade-8" data-grade="8" role="button" tabindex="0" aria-label="Enlarge 8th grade band rehearsal">
         <header>
           <span class="grade-number">8</span>
           <div>
@@ -109,12 +109,30 @@
       </article>
     </section>
 
+    <div class="grade-overlay" id="grade-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="grade-overlay-title">
+      <button class="routine-close" id="grade-close" type="button" aria-label="Close enlarged rehearsal">×</button>
+      <div class="grade-overlay-content">
+        <header class="grade-overlay-header">
+          <span class="grade-overlay-number" id="grade-overlay-number">6</span>
+          <div>
+            <p>TH</p>
+            <h2 id="grade-overlay-title">GRADE BAND</h2>
+          </div>
+        </header>
+        <ol class="grade-overlay-list" id="grade-overlay-list"></ol>
+        <div class="grade-overlay-empty" id="grade-overlay-empty" hidden>
+          <span>★</span>
+          <p>READY FOR TODAY'S MUSIC</p>
+        </div>
+      </div>
+    </div>
+
     <div class="bottom-bar">
       <p><span class="blink">▶</span> LISTEN • COUNT • PLAY</p>
       <p class="live-status" id="live-status"><span></span> CHECKING TODAY'S LISTS</p>
     </div>
   </main>
 
-  <script src="app.js?v=20260923-1205"></script>
+  <script src="app.js?v=20260923-1215"></script>
 </body>
 </html>
