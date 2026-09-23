@@ -30,23 +30,31 @@
     </header>
 
     <section class="routine-strip" aria-label="Band opening routine">
-      <div class="routine-step">
+      <button class="routine-step" type="button" data-step="01" data-label="ASSIGNED SEAT" data-accent="yellow">
         <span class="routine-number">01</span>
         <span class="routine-label">ASSIGNED SEAT</span>
-      </div>
-      <div class="routine-step routine-red">
+      </button>
+      <button class="routine-step routine-red" type="button" data-step="02" data-label="RED LIGHT RESET" data-accent="red">
         <span class="routine-number">02</span>
         <span class="routine-label">RED LIGHT RESET</span>
-      </div>
-      <div class="routine-step">
+      </button>
+      <button class="routine-step" type="button" data-step="03" data-label="ANNOUNCEMENTS" data-accent="pink">
         <span class="routine-number">03</span>
         <span class="routine-label">ANNOUNCEMENTS</span>
-      </div>
-      <div class="routine-step">
+      </button>
+      <button class="routine-step" type="button" data-step="04" data-label="UNPACK + WARM UP" data-accent="cyan">
         <span class="routine-number">04</span>
         <span class="routine-label">UNPACK + WARM UP</span>
-      </div>
+      </button>
     </section>
+
+    <div class="routine-overlay" id="routine-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="routine-overlay-label">
+      <button class="routine-close" id="routine-close" type="button" aria-label="Close routine step">×</button>
+      <div class="routine-overlay-content">
+        <span class="routine-overlay-number" id="routine-overlay-number">01</span>
+        <h2 id="routine-overlay-label">ASSIGNED SEAT</h2>
+      </div>
+    </div>
 
     <section class="boards" aria-label="Band rehearsal plans">
       <article class="grade-card grade-6" data-grade="6">
