@@ -138,10 +138,30 @@ let state = {
   lists: { "6": [], "7": [], "8": [] }
 };
 
+const CLOCK_TIME_ZONE = "America/New_York";
+
 function formatDate() {
   const now = new Date();
-  document.querySelector("#weekday").textContent = now.toLocaleDateString("en-US", { weekday: "long" }).toUpperCase();
-  document.querySelector("#full-date").textContent = now.toLocaleDateString("en-US", { month: "long", day: "numeric" }).toUpperCase();
+  document.querySelector("#weekday").textContent = now.toLocaleDateString("en-US", {
+    timeZone: CLOCK_TIME_ZONE,
+    weekday: "long"
+  }).toUpperCase();
+  document.querySelector("#full-date").textContent = now.toLocaleDateString("en-US", {
+    timeZone: CLOCK_TIME_ZONE,
+    month: "long",
+    day: "numeric"
+  }).toUpperCase();
+}
+
+function updateLiveTime() {
+  const target = document.querySelector("#live-time");
+  if (!target) return;
+  target.textContent = new Date().toLocaleTimeString("en-US", {
+    timeZone: CLOCK_TIME_ZONE,
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true
+  }).replace(/\s?[AP]M$/, "");
 }
 
 function normalizedLists(data) {
@@ -555,6 +575,8 @@ document.addEventListener("keydown", event => {
 });
 
 formatDate();
+updateLiveTime();
 render();
 refreshBoard();
+setInterval(updateLiveTime, 1000);
 setInterval(refreshBoard, REFRESH_INTERVAL);
