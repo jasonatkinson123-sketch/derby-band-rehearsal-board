@@ -70,6 +70,14 @@ h1 { margin: 0; font-family: var(--pixel); font-size: clamp(1.35rem, 3.1vw, 2.8r
 .date-lockup p { margin: 0; }
 #weekday { color: var(--yellow); font-family: var(--pixel); font-size: clamp(.7rem, 1.2vw, 1rem); }
 #full-date { margin-top: .35rem; font-size: clamp(1.3rem, 2vw, 1.8rem); letter-spacing: .07em; }
+#live-time {
+  margin-top: .28rem;
+  color: var(--cyan);
+  font-family: var(--pixel);
+  font-size: clamp(.62rem, .95vw, .82rem);
+  letter-spacing: .08em;
+  font-variant-numeric: tabular-nums;
+}
 
 .routine-strip {
   display: grid;
