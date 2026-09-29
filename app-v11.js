@@ -23,11 +23,16 @@ const FULL_78_LIBRARY = [
   "Snakebite"
 ];
 
-const DAILY_THEMES = [
+const WEEKDAY_THEMES = [
+  // Monday — original arcade palette
   { ink: "#11172f", paper: "#f7f1d5", yellow: "#ffd447", pink: "#ff5d8f", cyan: "#48d9d2", blue: "#5067ff", shadow: "#080b19" },
+  // Tuesday — slightly warmer / softer
   { ink: "#17202b", paper: "#f5eddc", yellow: "#f6c945", pink: "#ef6f88", cyan: "#65c7c4", blue: "#6177c9", shadow: "#091018" },
+  // Wednesday — subtle green cast
   { ink: "#18251f", paper: "#f3efd9", yellow: "#e9c94b", pink: "#e8747e", cyan: "#65c9ad", blue: "#5d77bd", shadow: "#0b1310" },
+  // Thursday — subtle plum cast
   { ink: "#241a2b", paper: "#f7efdc", yellow: "#f4c84f", pink: "#ed6f9b", cyan: "#68c8cf", blue: "#6a70d6", shadow: "#100b14" },
+  // Friday — charcoal / end-of-week palette
   { ink: "#202028", paper: "#f2ead7", yellow: "#eac94d", pink: "#e66f7e", cyan: "#70c6bf", blue: "#6876bd", shadow: "#0e0e13" }
 ];
 
@@ -127,8 +132,20 @@ function buildDailyLists(dayKey) {
   return { "6": sixth, "7": seventh, "8": eighth };
 }
 
-function applyDailyTheme(dayKey) {
-  const theme = DAILY_THEMES[hashString(`${dayKey}|theme`) % DAILY_THEMES.length];
+function applyDailyTheme() {
+  const weekday = new Date().toLocaleDateString("en-US", {
+    timeZone: CLOCK_TIME_ZONE,
+    weekday: "short"
+  });
+  const weekdayIndex = {
+    Mon: 0,
+    Tue: 1,
+    Wed: 2,
+    Thu: 3,
+    Fri: 4
+  }[weekday] ?? 0;
+
+  const theme = WEEKDAY_THEMES[weekdayIndex];
   const root = document.documentElement;
   Object.entries(theme).forEach(([name, value]) => {
     root.style.setProperty(`--${name}`, value);
@@ -443,7 +460,7 @@ function setStatus(message, online) {
 
 async function refreshBoard() {
   const dayKey = localDayKey();
-  applyDailyTheme(dayKey);
+  applyDailyTheme();
   state = { date: dayKey, lists: buildDailyLists(dayKey) };
   render();
   renderGradeOverlay();
