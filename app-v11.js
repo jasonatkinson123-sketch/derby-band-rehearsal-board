@@ -106,18 +106,20 @@ function buildDailyLists(dayKey) {
     "Song Randomizer"
   ];
 
-  const eighthLearning = ["To Conquer the Kraken", "Snakebite", "Engines of Resistance", "My Girl"];
-  const eighthRandom = pickForDay(
-    masteredPool(eighthLearning),
-    `${dayKey}|8|mastered`
-  );
+  const eighthFocus = [
+    "Jester Dance",
+    "Alpha Squadron",
+    "Mechanical Monsters",
+    "To Conquer the Kraken",
+    "Snakebite"
+  ];
   const eighthMiddle = shuffledForDay(
-    [...eighthLearning, eighthRandom].filter(Boolean),
+    eighthFocus,
     `${dayKey}|8|order`
   );
   const eighth = [
     "Master Note",
-    "Beginner",
+    "Beginner Pack",
     ...eighthMiddle,
     "Song Randomizer"
   ];
@@ -180,7 +182,7 @@ function isMasterNote(item) {
 }
 
 function isBeginner(item) {
-  return normalizePieceName(item) === "beginner";
+  return normalizePieceName(item).startsWith("beginner");
 }
 
 function pieceNoteStorageKey(grade, item) {
