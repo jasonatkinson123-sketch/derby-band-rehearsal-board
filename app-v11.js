@@ -89,12 +89,12 @@ function buildDailyLists(dayKey) {
     "Master Note",
     "Beginner",
     ...shuffledForDay(
-      ["Power", "Dragon Slayer", "Alpha Squadron", "Jester Dance"],
+      ["Power", "Dragon Slayer", "Alpha Squadron", "Jester Dance", "Mechanical Monsters"],
       `${dayKey}|6|music`
     )
   ];
 
-  const seventhLearning = ["Engines of Resistance", "Snakebite", "Valiance", "My Girl"];
+  const seventhLearning = ["Engines of Resistance", "Snakebite", "Valiance", "My Girl", "Blinding Lights"];
   const seventhRandom = pickForDay(
     masteredPool([...seventhLearning, "Haunted House Warm-Ups"]),
     `${dayKey}|7|mastered`
