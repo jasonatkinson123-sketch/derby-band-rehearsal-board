@@ -96,7 +96,7 @@ function buildDailyLists(dayKey) {
 
   const seventhLearning = ["Engines of Resistance", "Snakebite", "Valiance", "My Girl", "Blinding Lights"];
   if (dayKey === "2026-10-05") {
-    seventhLearning.push("Harrogate Festival");
+    seventhLearning.push("Harrowgate Festival");
   }
   const seventhRandom = pickForDay(
     masteredPool([...seventhLearning, "Band Warm-Ups"]),
