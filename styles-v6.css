@@ -775,17 +775,17 @@ html.season-halloween .master-drone-button.is-playing {
 /* Pixel moon */
 .pixel-moon {
   position: absolute;
-  top: 2.25rem;
-  right: 4.5vw;
-  width: 72px;
-  height: 72px;
+  top: .8rem;
+  right: clamp(11rem, 17vw, 15rem);
+  width: 58px;
+  height: 58px;
   background: #f6e7b3;
   border: 5px solid #171126;
   border-radius: 50%;
   box-shadow:
     -9px 8px 0 rgba(214,192,126,.34),
     0 0 0 4px rgba(246,231,179,.08);
-  opacity: .9;
+  opacity: .82;
 }
 
 html.season-autumn .pixel-moon { display: none; }
@@ -957,4 +957,10 @@ html.season-autumn .pixel-note {
     animation: none !important;
   }
   .pixel-leaf { display: none; }
+}
+
+
+html.season-halloween .date-lockup {
+  position: relative;
+  z-index: 3;
 }
