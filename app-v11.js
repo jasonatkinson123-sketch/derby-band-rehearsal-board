@@ -95,8 +95,11 @@ function buildDailyLists(dayKey) {
   ];
 
   const seventhLearning = ["Engines of Resistance", "Snakebite", "Valiance", "My Girl", "Blinding Lights"];
+  if (dayKey === "2026-10-05") {
+    seventhLearning.push("Harrogate Festival");
+  }
   const seventhRandom = pickForDay(
-    masteredPool([...seventhLearning, "Haunted House Warm-Ups"]),
+    masteredPool([...seventhLearning, "Band Warm-Ups"]),
     `${dayKey}|7|mastered`
   );
   const seventhMiddle = shuffledForDay(
@@ -106,7 +109,7 @@ function buildDailyLists(dayKey) {
   const seventh = [
     "Master Note",
     "Beginner",
-    "Haunted House Warm-Ups",
+    "Band Warm-Ups",
     ...seventhMiddle,
     "Song Randomizer"
   ];
