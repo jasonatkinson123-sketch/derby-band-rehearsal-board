@@ -683,3 +683,278 @@ textarea:focus { outline: 4px solid var(--cyan); outline-offset: -4px; }
 }
 
 @media (prefers-reduced-motion: reduce) { .blink { animation: none; } }
+
+
+/* === OCTOBER / AUTUMN SEASONAL SKIN ===
+   Seasonal decoration only. Core rehearsal layout and interactions are unchanged. */
+
+.seasonal-decor { display: none; }
+
+/* October: 8-bit New England Halloween */
+html.season-halloween {
+  --ink: #171126;
+  --paper: #f6ecd0;
+  --yellow: #ee9a2f;
+  --pink: #9b5ac8;
+  --cyan: #5db7aa;
+  --blue: #6b3f96;
+  --shadow: #090611;
+  background: var(--ink);
+}
+
+html.season-halloween body {
+  background:
+    radial-gradient(circle at 86% 7%, rgba(246, 236, 208, .12), transparent 12rem),
+    radial-gradient(circle at 18% 10%, rgba(238, 154, 47, .18), transparent 25rem),
+    radial-gradient(circle at 82% 88%, rgba(155, 90, 200, .18), transparent 29rem),
+    linear-gradient(180deg, #171126 0%, #1d1229 58%, #211427 100%);
+}
+
+html.season-halloween body::before {
+  opacity: .12;
+  background-image:
+    linear-gradient(rgba(246,236,208,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(246,236,208,.03) 1px, transparent 1px);
+}
+
+html.season-halloween main,
+html.season-autumn main {
+  position: relative;
+  z-index: 1;
+}
+
+html.season-halloween .seasonal-decor,
+html.season-autumn .seasonal-decor {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+html.season-halloween h1 {
+  text-shadow: 4px 4px 0 #6b3f96, 8px 8px 0 rgba(238,154,47,.13);
+}
+
+html.season-halloween .pixel-note {
+  background: var(--yellow);
+  box-shadow: 7px 7px 0 var(--pink);
+  transform: rotate(-1deg);
+}
+
+html.season-halloween .grade-card {
+  background:
+    linear-gradient(rgba(246,236,208,.94), rgba(246,236,208,.94)),
+    repeating-linear-gradient(0deg, transparent 0 11px, rgba(82,44,26,.08) 12px);
+}
+
+html.season-halloween .grade-card > header {
+  position: relative;
+  overflow: hidden;
+}
+
+html.season-halloween .grade-card > header::after {
+  content: "";
+  position: absolute;
+  right: -12px;
+  bottom: -14px;
+  width: 58px;
+  height: 58px;
+  border: 4px solid rgba(23,17,38,.22);
+  transform: rotate(45deg);
+}
+
+html.season-halloween .master-drone-button.is-playing {
+  box-shadow:
+    3px 3px 0 var(--shadow),
+    0 0 0 5px rgba(238,154,47,.16),
+    0 0 24px rgba(238,154,47,.42);
+}
+
+/* Pixel moon */
+.pixel-moon {
+  position: absolute;
+  top: 2.25rem;
+  right: 4.5vw;
+  width: 72px;
+  height: 72px;
+  background: #f6e7b3;
+  border: 5px solid #171126;
+  border-radius: 50%;
+  box-shadow:
+    -9px 8px 0 rgba(214,192,126,.34),
+    0 0 0 4px rgba(246,231,179,.08);
+  opacity: .9;
+}
+
+html.season-autumn .pixel-moon { display: none; }
+
+/* CSS-only tiny bats */
+.pixel-bat {
+  position: absolute;
+  width: 12px;
+  height: 8px;
+  background: #090611;
+  box-shadow: 0 2px 0 #090611;
+  animation: bat-drift 16s ease-in-out infinite alternate;
+  opacity: .8;
+}
+
+.pixel-bat::before,
+.pixel-bat::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  width: 16px;
+  height: 13px;
+  background: #090611;
+  clip-path: polygon(0 0, 100% 45%, 52% 55%, 100% 100%, 0 67%);
+}
+
+.pixel-bat::before {
+  right: 8px;
+  transform: scaleX(-1);
+}
+
+.pixel-bat::after { left: 8px; }
+
+.bat-1 { top: 8rem; right: 14vw; transform: scale(.9); }
+.bat-2 { top: 5.25rem; right: 22vw; transform: scale(.58); animation-delay: -5s; }
+.bat-3 { top: 10.5rem; left: 7vw; transform: scale(.68); animation-delay: -9s; }
+
+html.season-autumn .pixel-bat,
+html.season-autumn .pixel-pumpkin { display: none; }
+
+/* Pixel-ish pumpkins anchored safely outside the working area */
+.pixel-pumpkin {
+  position: absolute;
+  bottom: 1.15rem;
+  width: 54px;
+  height: 38px;
+  background:
+    linear-gradient(90deg,
+      #c86b20 0 16%,
+      #ee8f2f 16% 34%,
+      #d97722 34% 52%,
+      #ee8f2f 52% 70%,
+      #c86b20 70% 100%);
+  border: 5px solid #090611;
+  box-shadow: 6px 6px 0 rgba(9,6,17,.55);
+}
+
+.pixel-pumpkin::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 21px;
+  width: 10px;
+  height: 12px;
+  background: #56724b;
+  border: 3px solid #090611;
+}
+
+.pixel-pumpkin::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 7px;
+  height: 7px;
+  background: #281326;
+  box-shadow: 18px 0 0 #281326, 9px 10px 0 #281326;
+}
+
+.pumpkin-left { left: .8rem; transform: scale(.82) rotate(-2deg); }
+.pumpkin-right { right: .8rem; transform: scale(.7) rotate(2deg); }
+
+/* Falling pixel leaves: shared by October and November */
+.pixel-leaf {
+  --leaf: #d36b28;
+  position: absolute;
+  top: -22px;
+  width: 11px;
+  height: 11px;
+  background: var(--leaf);
+  box-shadow:
+    6px 0 0 var(--leaf),
+    0 6px 0 var(--leaf),
+    6px 6px 0 var(--leaf),
+    12px 6px 0 var(--leaf),
+    6px 12px 0 var(--leaf);
+  transform: rotate(45deg);
+  opacity: .58;
+  animation: leaf-fall 22s linear infinite;
+}
+
+.pixel-leaf::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 11px;
+  left: 13px;
+  top: 13px;
+  background: #7b4a2d;
+}
+
+.leaf-1 { left: 8%;  --leaf:#d36b28; animation-delay:-3s;  animation-duration:21s; }
+.leaf-2 { left: 24%; --leaf:#e39832; animation-delay:-15s; animation-duration:27s; transform:scale(.8) rotate(45deg); }
+.leaf-3 { left: 43%; --leaf:#a4512c; animation-delay:-8s;  animation-duration:24s; transform:scale(.65) rotate(45deg); }
+.leaf-4 { left: 61%; --leaf:#d9802d; animation-delay:-19s; animation-duration:30s; }
+.leaf-5 { left: 78%; --leaf:#a55b3d; animation-delay:-11s; animation-duration:25s; transform:scale(.72) rotate(45deg); }
+.leaf-6 { left: 92%; --leaf:#e0a13c; animation-delay:-22s; animation-duration:29s; transform:scale(.58) rotate(45deg); }
+
+@keyframes leaf-fall {
+  0%   { translate: 0 -6vh; rotate: 0deg; }
+  25%  { translate: 22px 28vh; rotate: 90deg; }
+  50%  { translate: -14px 56vh; rotate: 180deg; }
+  75%  { translate: 18px 84vh; rotate: 270deg; }
+  100% { translate: -8px 112vh; rotate: 360deg; }
+}
+
+@keyframes bat-drift {
+  0%   { translate: 0 0; }
+  50%  { translate: -14px 7px; }
+  100% { translate: 10px -5px; }
+}
+
+/* November: same architecture, calmer autumn palette and leaves only */
+html.season-autumn {
+  --ink: #172019;
+  --paper: #f4ead1;
+  --yellow: #d99a3c;
+  --pink: #b96445;
+  --cyan: #739c7c;
+  --blue: #765d47;
+  --shadow: #0b100c;
+  background: var(--ink);
+}
+
+html.season-autumn body {
+  background:
+    radial-gradient(circle at 15% 10%, rgba(217,154,60,.18), transparent 25rem),
+    radial-gradient(circle at 88% 84%, rgba(115,156,124,.15), transparent 28rem),
+    linear-gradient(180deg, #172019 0%, #20281d 100%);
+}
+
+html.season-autumn h1 {
+  text-shadow: 4px 4px 0 #765d47;
+}
+
+html.season-autumn .pixel-note {
+  box-shadow: 7px 7px 0 #b96445;
+}
+
+@media (max-width: 760px) {
+  .pixel-moon { right: 1rem; top: 1rem; width: 52px; height: 52px; }
+  .bat-2, .bat-3, .pumpkin-left { display: none; }
+  .pixel-pumpkin { opacity: .72; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-leaf,
+  .pixel-bat {
+    animation: none !important;
+  }
+  .pixel-leaf { display: none; }
+}
