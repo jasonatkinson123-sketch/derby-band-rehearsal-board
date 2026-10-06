@@ -85,6 +85,43 @@ function masteredPool(activePieces) {
 }
 
 function buildDailyLists(dayKey) {
+  if (dayKey === "2026-10-06") {
+    return {
+      "6": [
+        "Master Note",
+        "Beginner Pack",
+        "Mechanical Monsters",
+        "Spooky Tunes",
+        "Jester Dance",
+        "Alpha Squadron",
+        "Dragon Slayer",
+        "Power"
+      ],
+      "7": [
+        "Master Note",
+        "Beginner",
+        "Spooky Tunes",
+        "The Tempest",
+        "Harrowgate Festival",
+        "Blinding Lights",
+        "Snakebite",
+        "My Girl",
+        "Song Randomizer"
+      ],
+      "8": [
+        "Master Note",
+        "Beginner Pack",
+        "Spooky Tunes",
+        "Mechanical Monsters",
+        "Alpha Squadron",
+        "To Conquer the Kraken",
+        "Jester Dance",
+        "Snakebite",
+        "Song Randomizer"
+      ]
+    };
+  }
+
   const sixth = [
     "Master Note",
     "Beginner",
