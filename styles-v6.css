@@ -224,6 +224,36 @@ h1 { margin: 0; font-family: var(--pixel); font-size: clamp(1.35rem, 3.1vw, 2.8r
   color: var(--ink);
 }
 
+.routine-nav {
+  position: fixed;
+  top: 50%;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: clamp(3.25rem, 6vw, 4.75rem);
+  height: clamp(4.5rem, 9vw, 7rem);
+  transform: translateY(-50%);
+  padding: 0;
+  color: var(--paper);
+  background: color-mix(in srgb, var(--routine-accent) 72%, var(--ink));
+  border: 4px solid var(--paper);
+  box-shadow: 5px 5px 0 var(--shadow);
+  cursor: pointer;
+  font-family: var(--pixel);
+  font-size: clamp(1.1rem, 2.5vw, 2rem);
+}
+
+.routine-prev { left: clamp(1rem, 2vw, 2rem); }
+.routine-next { right: clamp(1rem, 2vw, 2rem); }
+
+.routine-nav:hover,
+.routine-nav:focus-visible {
+  background: var(--yellow);
+  color: var(--ink);
+  outline: 3px solid var(--paper);
+  outline-offset: 3px;
+}
+
 body.routine-open { overflow: hidden; }
 
 .boards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 2rem); }
