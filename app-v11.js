@@ -112,6 +112,7 @@ function buildDailyLists(dayKey) {
         "Master Note",
         "Beginner Pack",
         "Spooky Tunes",
+        "The Tempest",
         "Mechanical Monsters",
         "Alpha Squadron",
         "To Conquer the Kraken",
