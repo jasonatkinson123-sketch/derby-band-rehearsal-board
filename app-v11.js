@@ -563,7 +563,10 @@ const routineOverlay = document.querySelector("#routine-overlay");
 const routineOverlayNumber = document.querySelector("#routine-overlay-number");
 const routineOverlayLabel = document.querySelector("#routine-overlay-label");
 const routineClose = document.querySelector("#routine-close");
-const routineSteps = document.querySelectorAll(".routine-step, .action-step");
+const routinePrev = document.querySelector("#routine-prev");
+const routineNext = document.querySelector("#routine-next");
+const routineSteps = [...document.querySelectorAll(".routine-step, .action-step")];
+let activeRoutineIndex = -1;
 
 const routineAccents = {
   yellow: "var(--yellow)",
@@ -572,7 +575,10 @@ const routineAccents = {
   cyan: "var(--cyan)"
 };
 
-function openRoutine(stepButton) {
+function showRoutineAt(index, focusClose = false) {
+  if (!routineSteps.length) return;
+  activeRoutineIndex = (index + routineSteps.length) % routineSteps.length;
+  const stepButton = routineSteps[activeRoutineIndex];
   const step = stepButton.dataset.step || "";
   routineOverlayNumber.textContent = step;
   routineOverlayNumber.classList.toggle("is-hidden", !step);
@@ -580,17 +586,35 @@ function openRoutine(stepButton) {
   routineOverlay.style.setProperty("--routine-accent", routineAccents[stepButton.dataset.accent] || "var(--yellow)");
   routineOverlay.hidden = false;
   document.body.classList.add("routine-open");
-  routineClose.focus();
+  if (focusClose) routineClose.focus();
+}
+
+function openRoutine(stepButton) {
+  const index = routineSteps.indexOf(stepButton);
+  showRoutineAt(index >= 0 ? index : 0, true);
+}
+
+function pageRoutine(direction) {
+  if (routineOverlay.hidden || !routineSteps.length) return;
+  showRoutineAt(activeRoutineIndex + direction, false);
 }
 
 function closeRoutine() {
   routineOverlay.hidden = true;
+  activeRoutineIndex = -1;
   document.body.classList.remove("routine-open");
 }
 
 routineSteps.forEach(step => step.addEventListener("click", () => openRoutine(step)));
 routineClose.addEventListener("click", closeRoutine);
+routinePrev?.addEventListener("click", () => pageRoutine(-1));
+routineNext?.addEventListener("click", () => pageRoutine(1));
 document.addEventListener("keydown", event => {
+  if (!routineOverlay.hidden && (event.key === "ArrowLeft" || event.key === "ArrowRight")) {
+    event.preventDefault();
+    pageRoutine(event.key === "ArrowLeft" ? -1 : 1);
+    return;
+  }
   if (event.key !== "Escape") return;
   if (!routineOverlay.hidden) closeRoutine();
   if (!gradeOverlay.hidden) closeGrade();
