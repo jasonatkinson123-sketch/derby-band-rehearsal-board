@@ -20,7 +20,7 @@
       else if (month === 10) document.documentElement.classList.add("season-autumn");
     })();
   </script>
-  <link rel="stylesheet" href="styles-v6.css?v=20261005-halloween-2">
+  <link rel="stylesheet" href="styles-v6.css?v=20261006-reminder-nav-1">
   <!-- seasonal build 2026-10-05b -->
 </head>
 <body>
@@ -76,10 +76,12 @@
 
     <div class="routine-overlay" id="routine-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="routine-overlay-label">
       <button class="routine-close" id="routine-close" type="button" aria-label="Close routine step">×</button>
+      <button class="routine-nav routine-prev" id="routine-prev" type="button" aria-label="Previous reminder">◀</button>
       <div class="routine-overlay-content">
         <span class="routine-overlay-number" id="routine-overlay-number">01</span>
         <h2 id="routine-overlay-label">ASSIGNED SEAT</h2>
       </div>
+      <button class="routine-nav routine-next" id="routine-next" type="button" aria-label="Next reminder">▶</button>
     </div>
 
     <section class="boards" aria-label="Band rehearsal plans">
@@ -180,9 +182,9 @@
     </div>
   </main>
 
-  <script src="app-v11.js?v=20261005-rehearsal-1"></script>
+  <script src="app-v11.js?v=20261006-reminder-nav-1"></script>
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/rewards-config.js?v=20261005-requests-1"></script>
-  <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/class-clock.js?v=20261006-1"></script>
+  <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/class-clock.js?v=20261006-pulse-1"></script>
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/band-bell.js"></script>
 </body>
 </html>
