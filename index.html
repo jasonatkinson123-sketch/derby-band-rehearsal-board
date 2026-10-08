@@ -176,17 +176,30 @@
       </div>
     </div>
 
+
+
+<section class="quick-class-tools" aria-label="Teacher controls">
+  <div class="quick-class-tool timer">
+    <small>QUICK TIMER</small>
+    <strong id="quick-five-display">5:00</strong>
+    <button id="quick-five-button" type="button">START 5 MINUTES</button>
+  </div>
+
+  <div class="quick-class-tool seats">
+    <small>CLASSROOM CUE</small>
+    <strong>RETURN TO SEATS</strong>
+    <button id="quick-seat-button" type="button">PLAY CHIME + MESSAGE</button>
+  </div>
+</section>
+
+
     <div class="bottom-bar">
       <p><span class="blink">▶</span> LISTEN • COUNT • PLAY</p>
       <p class="live-status" id="live-status"><span></span> CHECKING TODAY'S LISTS</p>
     </div>
   </main>
 
-  <script src="app-v11.js?v=20261006-rehearsals-1"></script>
-  <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/rewards-config.js?v=20261005-requests-1"></script>
-  <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/class-clock.js?v=20261007-early-1"></script>
-  <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/band-bell.js?v=20261007-early-1"></script>
-</body>
+
   <style>
   .quick-class-tools {
     display: grid;
@@ -243,21 +256,6 @@
     .quick-class-tools { grid-template-columns: 1fr; }
   }
 </style>
-
-<section class="quick-class-tools" aria-label="Teacher controls">
-  <div class="quick-class-tool timer">
-    <small>QUICK TIMER</small>
-    <strong id="quick-five-display">5:00</strong>
-    <button id="quick-five-button" type="button">START 5 MINUTES</button>
-  </div>
-
-  <div class="quick-class-tool seats">
-    <small>CLASSROOM CUE</small>
-    <strong>RETURN TO SEATS</strong>
-    <button id="quick-seat-button" type="button">PLAY CHIME + MESSAGE</button>
-  </div>
-</section>
-
 <script>
   (() => {
     const display = document.querySelector("#quick-five-display");
@@ -340,4 +338,9 @@
     });
   })();
 </script>
+  <script src="app-v11.js?v=20261006-rehearsals-1"></script>
+  <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/rewards-config.js?v=20261005-requests-1"></script>
+  <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/class-clock.js?v=20261007-early-1"></script>
+  <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/band-bell.js?v=20261007-early-1"></script>
+</body>
 </html>
