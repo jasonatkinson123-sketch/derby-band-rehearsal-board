@@ -187,4 +187,157 @@
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/class-clock.js?v=20261007-early-1"></script>
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/band-bell.js?v=20261007-early-1"></script>
 </body>
+  <style>
+  .quick-class-tools {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 1.2rem 0;
+  }
+  .quick-class-tool {
+    padding: 1rem;
+    color: var(--ink, #11172f);
+    background: var(--paper, #f7f1d5);
+    border: 4px solid var(--ink, #11172f);
+    box-shadow: 6px 6px 0 var(--shadow, #080b19);
+  }
+  .quick-class-tool.timer { outline: 3px solid var(--yellow, #ffd447); }
+  .quick-class-tool.seats { outline: 3px solid var(--pink, #ff5d8f); }
+  .quick-class-tool small,
+  .quick-class-tool strong,
+  .quick-class-tool button {
+    font-family: "Press Start 2P", monospace;
+  }
+  .quick-class-tool small {
+    display: block;
+    color: var(--blue, #5067ff);
+    font-size: .52rem;
+  }
+  .quick-class-tool strong {
+    display: block;
+    margin: .7rem 0;
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    line-height: 1.35;
+  }
+  #quick-five-display {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-variant-numeric: tabular-nums;
+  }
+  .quick-class-tool button {
+    width: 100%;
+    min-height: 2.7rem;
+    padding: .65rem;
+    cursor: pointer;
+    color: var(--ink, #11172f);
+    background: var(--yellow, #ffd447);
+    border: 3px solid var(--ink, #11172f);
+    box-shadow: 3px 3px 0 var(--ink, #11172f);
+    font-size: .52rem;
+  }
+  .seats button { background: var(--pink, #ff5d8f); }
+  .quick-class-tool button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--ink, #11172f);
+  }
+  @media (max-width: 520px) {
+    .quick-class-tools { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="quick-class-tools" aria-label="Teacher controls">
+  <div class="quick-class-tool timer">
+    <small>QUICK TIMER</small>
+    <strong id="quick-five-display">5:00</strong>
+    <button id="quick-five-button" type="button">START 5 MINUTES</button>
+  </div>
+
+  <div class="quick-class-tool seats">
+    <small>CLASSROOM CUE</small>
+    <strong>RETURN TO SEATS</strong>
+    <button id="quick-seat-button" type="button">PLAY CHIME + MESSAGE</button>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const display = document.querySelector("#quick-five-display");
+    const timerButton = document.querySelector("#quick-five-button");
+    let remaining = 300;
+    let interval;
+
+    const render = () => {
+      display.textContent =
+        `${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, "0")}`;
+    };
+
+    timerButton.addEventListener("click", () => {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+        timerButton.textContent = "RESUME TIMER";
+        return;
+      }
+
+      if (remaining === 0) remaining = 300;
+      timerButton.textContent = "PAUSE TIMER";
+      const ends = Date.now() + remaining * 1000;
+
+      interval = setInterval(() => {
+        remaining = Math.max(0, Math.ceil((ends - Date.now()) / 1000));
+        render();
+
+        if (remaining === 0) {
+          clearInterval(interval);
+          interval = null;
+          timerButton.textContent = "START AGAIN";
+        }
+      }, 250);
+    });
+
+    document.querySelector("#quick-seat-button").addEventListener("click", () => {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      let delay = 900;
+
+      if (AudioContextClass) {
+        const context = new AudioContextClass();
+        [1046.5, 1318.5, 1568].forEach((frequency, index) => {
+          const oscillator = context.createOscillator();
+          const gain = context.createGain();
+          const start = context.currentTime + .03 + index * .13;
+
+          oscillator.type = "sine";
+          oscillator.frequency.setValueAtTime(frequency, start);
+          gain.gain.setValueAtTime(.0001, start);
+          gain.gain.exponentialRampToValueAtTime(.16, start + .025);
+          gain.gain.exponentialRampToValueAtTime(.0001, start + .85);
+
+          oscillator.connect(gain).connect(context.destination);
+          oscillator.start(start);
+          oscillator.stop(start + .9);
+        });
+        setTimeout(() => context.close(), 1600);
+        delay = 1050;
+      }
+
+      setTimeout(() => {
+        speechSynthesis.cancel();
+        const message = new SpeechSynthesisUtterance(
+          "Please return to your assigned seats at this time. Thank you."
+        );
+        message.lang = "en-GB";
+        message.rate = .72;
+        message.pitch = 1.08;
+
+        const voices = speechSynthesis.getVoices();
+        const british = voices.filter(v => /^en[-_]GB/i.test(v.lang));
+        message.voice =
+          british.find(v => /female|serena|kate|susan|hazel|fiona/i.test(v.name)) ||
+          british[0] ||
+          null;
+
+        speechSynthesis.speak(message);
+      }, delay);
+    });
+  })();
+</script>
 </html>
