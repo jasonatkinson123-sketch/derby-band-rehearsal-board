@@ -85,88 +85,37 @@ function masteredPool(activePieces) {
 }
 
 function buildDailyLists(dayKey) {
-  if (dayKey === "2026-10-06") {
-    return {
-      "6": [
-        "Master Note",
-        "Beginner Pack",
-        "Mechanical Monsters",
-        "Spooky Tunes",
-        "Jester Dance",
-        "Alpha Squadron",
-        "Dragon Slayer",
-        "Power"
-      ],
-      "7": [
-        "Master Note",
-        "Beginner",
-        "Spooky Tunes",
-        "The Tempest",
-        "Harrowgate Festival",
-        "Blinding Lights",
-        "Snakebite",
-        "My Girl",
-        "Song Randomizer"
-      ],
-      "8": [
-        "Master Note",
-        "Beginner Pack",
-        "Spooky Tunes",
-        "The Tempest",
-        "Mechanical Monsters",
-        "Alpha Squadron",
-        "To Conquer the Kraken",
-        "Jester Dance",
-        "Snakebite",
-        "Song Randomizer"
-      ]
-    };
-  }
-
+  // Keep the familiar opening routine, rotate the music daily.
   const sixth = [
     "Master Note",
-    "Beginner",
+    "Beginner Pack",
     ...shuffledForDay(
-      ["Power", "Dragon Slayer", "Alpha Squadron", "Jester Dance", "Mechanical Monsters"],
-      `${dayKey}|6|music`
+      ["Power", "Dragon Slayer", "Alpha Squadron", "Jester Dance", "Mechanical Monsters", "Spooky Packet"],
+      `${dayKey}|6|music|oct8`
     )
   ];
 
-  const seventhLearning = ["Engines of Resistance", "Snakebite", "Valiance", "My Girl", "Blinding Lights"];
-  if (dayKey === "2026-10-05") {
-    seventhLearning.push("Harrowgate Festival");
-  }
+  const seventhFocus = [
+    "Engines of Resistance", "Snakebite", "Valiance",
+    "Blinding Lights", "Harrowgate Festival", "The Tempest", "Spooky Packet"
+  ];
   const seventhRandom = pickForDay(
-    masteredPool([...seventhLearning, "Band Warm-Ups"]),
-    `${dayKey}|7|mastered`
-  );
-  const seventhMiddle = shuffledForDay(
-    [...seventhLearning, seventhRandom].filter(Boolean),
-    `${dayKey}|7|order`
+    masteredPool([...seventhFocus, "Band Warm-Ups"]),
+    `${dayKey}|7|mastered|oct8`
   );
   const seventh = [
-    "Master Note",
-    "Beginner",
-    "Band Warm-Ups",
-    ...seventhMiddle,
+    "Master Note", "Beginner", "Band Warm-Ups",
+    ...shuffledForDay([...seventhFocus, seventhRandom].filter(Boolean), `${dayKey}|7|order|oct8`),
     "Song Randomizer"
   ];
 
-  const eighthFocus = [
-    "Jester Dance",
-    "Alpha Squadron",
-    "Mechanical Monsters",
-    "To Conquer the Kraken",
-    "Snakebite"
-  ];
-  const eighthMiddle = shuffledForDay(
-    eighthFocus,
-    `${dayKey}|8|order`
-  );
   const eighth = [
-    "Master Note",
-    "Beginner Pack",
-    ...eighthMiddle,
+    "Master Note", "Beginner Pack",
+    ...shuffledForDay(
+      ["Jester Dance", "Alpha Squadron", "Mechanical Monsters",
+       "To Conquer the Kraken", "Snakebite", "The Tempest", "Spooky Packet"],
+      `${dayKey}|8|order|oct8`
+    ),
     "Song Randomizer"
   ];
 
