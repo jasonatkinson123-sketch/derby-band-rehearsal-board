@@ -500,7 +500,7 @@ function renderGradeOverlay() {
   // Artwork is keyed to the piece name, never to its position or today's schedule.
   const PIECE_ART = {
     "jester dance": { src: "assets/jester-dance.webp", alt: "Retro arcade jester" },
-    "snakebite": { src: "assets/snakebite.webp", alt: "Retro arcade cobra" }
+    "snakebite": { src: "assets/snakebite-clean.svg", alt: "Retro arcade cobra" }
   };
 
   const pieceSlides = items.map(item => {
