@@ -497,12 +497,31 @@ function renderGradeOverlay() {
 
   readySlide.append(star, readyText, hint);
 
+  // Artwork is keyed to the piece name, never to its position or today's schedule.
+  const PIECE_ART = {
+    "jester dance": { src: "assets/jester-dance.webp", alt: "Retro arcade jester" },
+    "snakebite": { src: "assets/snakebite.webp", alt: "Retro arcade cobra" }
+  };
+
   const pieceSlides = items.map(item => {
     const li = document.createElement("li");
     const title = document.createElement("span");
     title.className = "grade-piece-title";
     title.textContent = item;
     li.append(title);
+
+    const artwork = PIECE_ART[normalizePieceName(item)];
+    if (artwork) {
+      li.classList.add("grade-artwork-slide");
+      const img = document.createElement("img");
+      img.className = "grade-piece-artwork";
+      img.src = artwork.src;
+      img.alt = artwork.alt;
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.onerror = () => { img.hidden = true; };
+      li.append(img);
+    }
 
     if (isMasterNote(item)) {
       li.classList.add("grade-master-note-slide");
