@@ -178,6 +178,16 @@
 
 
 
+
+<!-- Classroom stop-playing cue: compact left-side button, enlarged red reminder. -->
+<button type="button" id="stop-playing-cue" class="stop-playing-cue" aria-haspopup="dialog" aria-controls="stop-playing-dialog" aria-label="Show stop playing and talking reminder">STOP PLAY + TALK</button>
+<div id="stop-playing-dialog" class="stop-playing-dialog" role="dialog" aria-modal="true" aria-labelledby="stop-playing-message" hidden>
+  <div class="stop-playing-panel">
+    <button type="button" id="stop-playing-close" class="stop-playing-close" aria-label="Close reminder">×</button>
+    <h2 id="stop-playing-message">AT THIS TIME,<br>STOP PLAYING<br>AND TALKING.</h2>
+  </div>
+</div>
+
 <section class="quick-class-tools" aria-label="Teacher controls">
   <div class="quick-class-tool timer">
     <small>QUICK TIMER</small>
@@ -201,6 +211,45 @@
 
 
   <style>
+
+  .stop-playing-cue {
+    position: fixed; left: 12px; bottom: 282px; z-index: 2147483502;
+    width: 174px; min-height: 42px; padding: 10px 6px; cursor: pointer;
+    background: #d72032; color: #fff; border: 3px solid #fff;
+    box-shadow: 4px 4px 0 #111;
+    font: 900 10px/1.4 "Press Start 2P", monospace; text-align: center;
+  }
+  .stop-playing-cue:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #111; }
+  .stop-playing-cue:focus-visible, .stop-playing-close:focus-visible {
+    outline: 4px solid #ffd447; outline-offset: 4px;
+  }
+  .stop-playing-dialog {
+    position: fixed; inset: 0; z-index: 2147483645; padding: clamp(14px, 3vw, 40px);
+    display: grid; place-items: center; background: rgba(8, 0, 0, .84);
+  }
+  .stop-playing-dialog[hidden] { display: none !important; }
+  .stop-playing-panel {
+    position: relative; display: grid; place-items: center;
+    width: 100%; min-height: min(86vh, 820px); padding: clamp(45px, 8vw, 90px) 22px;
+    background: #cf1729; color: #fff; border: clamp(5px, .8vw, 12px) solid #fff;
+    box-shadow: 12px 12px 0 #111; text-align: center;
+  }
+  .stop-playing-panel h2 {
+    margin: 0; color: #fff;
+    font: 900 clamp(19px, 4.5vw, 64px)/1.5 "Press Start 2P", monospace;
+    text-shadow: 5px 5px 0 rgba(0, 0, 0, .18);
+  }
+  .stop-playing-close {
+    position: absolute; top: 12px; right: 12px; width: 48px; height: 48px;
+    border: 3px solid #fff; background: #fff; color: #b91425;
+    font: bold 34px/1 Arial, sans-serif; cursor: pointer;
+  }
+  @media (max-width: 600px) {
+    .stop-playing-cue { width: 150px; font-size: 9px; }
+    .stop-playing-panel { min-height: 78vh; }
+    .stop-playing-panel h2 { font-size: clamp(15px, 4.1vw, 25px); line-height: 1.65; }
+  }
+
   .quick-class-tools {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -345,5 +394,28 @@
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/five-minute-timer.js?v=20261008-3"></script>
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/attendance-reminder.js?v=20261015-2"></script>
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/seat-announcement.js?v=20261008-1"></script>
+<script>
+  (() => {
+    const cue = document.getElementById("stop-playing-cue");
+    const dialog = document.getElementById("stop-playing-dialog");
+    const close = document.getElementById("stop-playing-close");
+    let lastFocused = null;
+    cue.addEventListener("click", () => {
+      lastFocused = document.activeElement;
+      dialog.hidden = false;
+      close.focus();
+    });
+    function dismiss() {
+      dialog.hidden = true;
+      (lastFocused || cue).focus();
+    }
+    close.addEventListener("click", dismiss);
+    dialog.addEventListener("click", event => { if (event.target === dialog) dismiss(); });
+    dialog.addEventListener("keydown", event => {
+      if (event.key === "Escape") { event.preventDefault(); dismiss(); }
+      if (event.key === "Tab") { event.preventDefault(); close.focus(); }
+    });
+  })();
+</script>
 </body>
 </html>
