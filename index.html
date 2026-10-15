@@ -402,30 +402,36 @@
     let lastFocused = null;
     let chimeContext = null;
 
-    // Quiet three-note classroom attention cue. No speech or loud alarm.
+    // Familiar Westminster-style church chimes: fuller bell tone and a little louder.
     function playGentleChime() {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (!AudioContextClass) return;
       try {
         chimeContext = chimeContext || new AudioContextClass();
         if (chimeContext.state === "suspended") chimeContext.resume().catch(() => {});
-        const now = chimeContext.currentTime;
-        [[783.99, 0], [987.77, .17], [1174.66, .34]].forEach(([frequency, delay]) => {
-          const tone = chimeContext.createOscillator();
-          const volume = chimeContext.createGain();
+        const now = chimeContext.currentTime + .015;
+        // E–C–D–G, in the style of a traditional four-note church clock chime.
+        const notes = [[659.25, 0], [523.25, .48], [587.33, .96], [392, 1.44]];
+        notes.forEach(([frequency, delay], index) => {
           const start = now + delay;
-          tone.type = "sine";
-          tone.frequency.setValueAtTime(frequency, start);
-          volume.gain.setValueAtTime(.0001, start);
-          volume.gain.exponentialRampToValueAtTime(.055, start + .04);
-          volume.gain.exponentialRampToValueAtTime(.0001, start + .75);
-          tone.connect(volume);
-          volume.connect(chimeContext.destination);
-          tone.start(start);
-          tone.stop(start + .8);
+          const duration = index === notes.length - 1 ? 2.8 : 1.8;
+          // Layered partials give each note a soft bell-like ring, not a beep.
+          [[1, .11], [2, .028], [2.4, .012]].forEach(([partial, peak]) => {
+            const tone = chimeContext.createOscillator();
+            const volume = chimeContext.createGain();
+            tone.type = "sine";
+            tone.frequency.setValueAtTime(frequency * partial, start);
+            volume.gain.setValueAtTime(.0001, start);
+            volume.gain.exponentialRampToValueAtTime(peak, start + .025);
+            volume.gain.exponentialRampToValueAtTime(.0001, start + duration);
+            tone.connect(volume);
+            volume.connect(chimeContext.destination);
+            tone.start(start);
+            tone.stop(start + duration + .03);
+          });
         });
       } catch (error) {
-        // The visual reminder still works if this device blocks audio.
+        // The sign still opens if audio is blocked by the device.
       }
     }
 
