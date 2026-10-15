@@ -184,7 +184,7 @@
 <div id="stop-playing-dialog" class="stop-playing-dialog" role="dialog" aria-modal="true" aria-labelledby="stop-playing-message" hidden>
   <div class="stop-playing-panel">
     <button type="button" id="stop-playing-close" class="stop-playing-close" aria-label="Close reminder">×</button>
-    <h2 id="stop-playing-message">AT THIS TIME,<br>STOP PLAYING<br>AND TALKING.</h2>
+    <h2 id="stop-playing-message">INSTRUMENTS DOWN<br>EYES UP<br>THANK YOU!</h2>
   </div>
 </div>
 
@@ -400,10 +400,40 @@
     const dialog = document.getElementById("stop-playing-dialog");
     const close = document.getElementById("stop-playing-close");
     let lastFocused = null;
+    let chimeContext = null;
+
+    // Quiet three-note classroom attention cue. No speech or loud alarm.
+    function playGentleChime() {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+      try {
+        chimeContext = chimeContext || new AudioContextClass();
+        if (chimeContext.state === "suspended") chimeContext.resume().catch(() => {});
+        const now = chimeContext.currentTime;
+        [[783.99, 0], [987.77, .17], [1174.66, .34]].forEach(([frequency, delay]) => {
+          const tone = chimeContext.createOscillator();
+          const volume = chimeContext.createGain();
+          const start = now + delay;
+          tone.type = "sine";
+          tone.frequency.setValueAtTime(frequency, start);
+          volume.gain.setValueAtTime(.0001, start);
+          volume.gain.exponentialRampToValueAtTime(.055, start + .04);
+          volume.gain.exponentialRampToValueAtTime(.0001, start + .75);
+          tone.connect(volume);
+          volume.connect(chimeContext.destination);
+          tone.start(start);
+          tone.stop(start + .8);
+        });
+      } catch (error) {
+        // The visual reminder still works if this device blocks audio.
+      }
+    }
+
     cue.addEventListener("click", () => {
       lastFocused = document.activeElement;
       dialog.hidden = false;
       close.focus();
+      playGentleChime();
     });
     function dismiss() {
       dialog.hidden = true;
