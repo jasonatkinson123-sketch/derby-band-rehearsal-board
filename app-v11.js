@@ -20,7 +20,8 @@ const FULL_78_LIBRARY = [
   "Valiance",
   "Engines of Resistance",
   "To Conquer the Kraken",
-  "Snakebite"
+  "Snakebite",
+  "Paint It, Black"
 ];
 
 const WEEKDAY_THEMES = [
@@ -97,7 +98,7 @@ function buildDailyLists(dayKey) {
 
   const seventhFocus = [
     "Engines of Resistance", "Snakebite", "Valiance",
-    "Blinding Lights", "Harrowgate Festival", "The Tempest", "Spooky Packet"
+    "Blinding Lights", "Harrowgate Festival", "The Tempest", "Paint It, Black", "Spooky Packet"
   ];
   const seventhRandom = pickForDay(
     masteredPool([...seventhFocus, "Band Warm-Ups"]),
@@ -113,7 +114,7 @@ function buildDailyLists(dayKey) {
     "Master Note", "Beginner Pack",
     ...shuffledForDay(
       ["Jester Dance", "Alpha Squadron", "Mechanical Monsters",
-       "To Conquer the Kraken", "Snakebite", "The Tempest", "Spooky Packet"],
+       "To Conquer the Kraken", "Snakebite", "The Tempest", "Paint It, Black", "Spooky Packet"],
       `${dayKey}|8|order|oct8`
     ),
     "Song Randomizer"
