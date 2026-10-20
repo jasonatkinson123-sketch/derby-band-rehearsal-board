@@ -401,6 +401,48 @@
     const close = document.getElementById("stop-playing-close");
     let lastFocused = null;
     let chimeContext = null;
+    const repeatChime = document.getElementById("repeat-chime");
+    const secondsDisplay = document.getElementById("silence-seconds");
+    const counterToggle = document.getElementById("silence-toggle");
+    const counterReset = document.getElementById("silence-reset");
+    let elapsedSeconds = 0;
+    let counterStart = 0;
+    let counterTicker = null;
+    let lastChimeTime = 0;
+    function renderCounter() {
+      secondsDisplay.textContent = String(elapsedSeconds).padStart(2, "0");
+      counterToggle.textContent = counterTicker !== null ? "PAUSE" : elapsedSeconds >= 60 ? "DONE" : elapsedSeconds > 0 ? "RESUME" : "START";
+      counterToggle.disabled = elapsedSeconds >= 60;
+    }
+    function pauseCounter() {
+      if (counterTicker !== null) {
+        elapsedSeconds = Math.min(60, Math.floor((performance.now() - counterStart) / 1000));
+        clearInterval(counterTicker);
+        counterTicker = null;
+      }
+      renderCounter();
+    }
+    counterToggle.addEventListener("click", () => {
+      if (counterTicker !== null) { pauseCounter(); return; }
+      if (elapsedSeconds >= 60) return;
+      counterStart = performance.now() - elapsedSeconds * 1000;
+      counterTicker = setInterval(() => {
+        elapsedSeconds = Math.min(60, Math.floor((performance.now() - counterStart) / 1000));
+        if (elapsedSeconds >= 60) pauseCounter();
+        else renderCounter();
+      }, 100);
+      renderCounter();
+    });
+    counterReset.addEventListener("click", () => {
+      pauseCounter();
+      elapsedSeconds = 0;
+      renderCounter();
+    });
+    repeatChime.addEventListener("click", () => {
+      if (performance.now() - lastChimeTime < 3000) return;
+      lastChimeTime = performance.now();
+      playGentleChime();
+    });
 
     // Familiar Westminster-style church chimes: fuller bell tone and a little louder.
     function playGentleChime() {
@@ -439,9 +481,13 @@
       lastFocused = document.activeElement;
       dialog.hidden = false;
       close.focus();
+      lastChimeTime = performance.now();
       playGentleChime();
     });
     function dismiss() {
+      pauseCounter();
+      elapsedSeconds = 0;
+      renderCounter();
       dialog.hidden = true;
       (lastFocused || cue).focus();
     }
