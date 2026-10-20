@@ -184,7 +184,7 @@
 <div id="stop-playing-dialog" class="stop-playing-dialog" role="dialog" aria-modal="true" aria-labelledby="stop-playing-message" hidden>
   <div class="stop-playing-panel">
     <button type="button" id="stop-playing-close" class="stop-playing-close" aria-label="Close reminder">×</button>
-    <h2 id="stop-playing-message">INSTRUMENTS DOWN<br>NO TALKING<br>EYES UP<br>THANK YOU!</h2>
+    <h2 id="stop-playing-message">INSTRUMENTS DOWN<br>NO TALKING<br>EYES UP<br>THANK YOU!</h2><div class="stop-controls"><button id="repeat-chime" type="button">RING CHIME AGAIN</button><span id="silence-seconds">00</span><button id="silence-toggle" type="button">START</button><button id="silence-reset" type="button">RESET</button></div>
   </div>
 </div>
 
@@ -449,7 +449,7 @@
     dialog.addEventListener("click", event => { if (event.target === dialog) dismiss(); });
     dialog.addEventListener("keydown", event => {
       if (event.key === "Escape") { event.preventDefault(); dismiss(); }
-      if (event.key === "Tab") { event.preventDefault(); close.focus(); }
+      
     });
   })();
 </script>
