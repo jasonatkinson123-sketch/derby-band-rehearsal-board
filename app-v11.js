@@ -18,10 +18,9 @@ const FULL_78_LIBRARY = [
   "Wrath of the Mechanical Monsters",
   "The Tempest",
   "Valiance",
-  "Engines of Resistance",
   "To Conquer the Kraken",
   "Snakebite",
-  "Paint It, Black"
+  "In Darkest Night"
 ];
 
 const WEEKDAY_THEMES = [
@@ -91,14 +90,14 @@ function buildDailyLists(dayKey) {
     "Master Note",
     "Beginner Pack",
     ...shuffledForDay(
-      ["Power", "Dragon Slayer", "Alpha Squadron", "Jester Dance", "Mechanical Monsters", "The Tempest", "Midnight Madness", "Spooky Packet"],
+      ["Power", "Dragon Slayer", "Alpha Squadron", "Jester Dance", "Mechanical Monsters", "The Tempest", "Midnight Madness", "Spooky Packet", "Shine"],
       `${dayKey}|6|music|oct8`
     )
   ];
 
   const seventhFocus = [
-    "Engines of Resistance", "Snakebite", "Valiance",
-    "Blinding Lights", "Harrowgate Festival", "The Tempest", "Paint It, Black", "Spooky Packet"
+    "Snakebite", "Valiance",
+    "Harrowgate Festival", "The Tempest", "In Darkest Night", "Spooky Packet"
   ];
   const seventhRandom = pickForDay(
     masteredPool([...seventhFocus, "Band Warm-Ups"]),
@@ -114,7 +113,7 @@ function buildDailyLists(dayKey) {
     "Master Note", "Beginner Pack",
     ...shuffledForDay(
       ["Jester Dance", "Alpha Squadron", "Mechanical Monsters",
-       "To Conquer the Kraken", "Snakebite", "The Tempest", "Paint It, Black", "Spooky Packet"],
+       "To Conquer the Kraken", "Snakebite", "The Tempest", "In Darkest Night", "Spooky Packet"],
       `${dayKey}|8|order|oct8`
     ),
     "Song Randomizer"
