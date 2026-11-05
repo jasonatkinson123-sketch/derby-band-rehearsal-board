@@ -409,6 +409,11 @@
     let counterStart = 0;
     let counterTicker = null;
     let lastChimeTime = 0;
+    let autoDismissTimer = null;
+    function scheduleAutoDismiss() {
+      clearTimeout(autoDismissTimer);
+      autoDismissTimer = setTimeout(dismiss, 30000);
+    }
     function renderCounter() {
       secondsDisplay.textContent = String(elapsedSeconds).padStart(2, "0");
       counterToggle.textContent = counterTicker !== null ? "PAUSE" : elapsedSeconds >= 60 ? "DONE" : elapsedSeconds > 0 ? "RESUME" : "START";
@@ -480,11 +485,15 @@
     cue.addEventListener("click", () => {
       lastFocused = document.activeElement;
       dialog.hidden = false;
+      scheduleAutoDismiss();
       close.focus();
       lastChimeTime = performance.now();
       playGentleChime();
     });
     function dismiss() {
+      clearTimeout(autoDismissTimer);
+      autoDismissTimer = null;
+      if (dialog.hidden) return;
       pauseCounter();
       elapsedSeconds = 0;
       renderCounter();
