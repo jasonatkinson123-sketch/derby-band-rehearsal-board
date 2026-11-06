@@ -90,14 +90,14 @@ function buildDailyLists(dayKey) {
     "Master Note",
     "Beginner Pack",
     ...shuffledForDay(
-      ["Power", "Dragon Slayer", "Alpha Squadron", "Jester Dance", "Mechanical Monsters", "The Tempest", "Midnight Madness", "Spooky Packet", "Shine"],
+      ["Power", "Dragon Slayer", "Alpha Squadron", "Jester Dance", "Mechanical Monsters", "The Tempest", "Midnight Madness", "Christmas Play Pack", "Shine"],
       `${dayKey}|6|music|oct8`
     )
   ];
 
   const seventhFocus = [
     "Snakebite", "Valiance",
-    "Harrowgate Festival", "The Tempest", "In Darkest Night", "Spooky Packet"
+    "Harrowgate Festival", "The Tempest", "In Darkest Night", "Christmas Play Pack"
   ];
   const seventhRandom = pickForDay(
     masteredPool([...seventhFocus, "Band Warm-Ups"]),
@@ -113,7 +113,7 @@ function buildDailyLists(dayKey) {
     "Master Note", "Beginner Pack",
     ...shuffledForDay(
       ["Jester Dance", "Alpha Squadron", "Mechanical Monsters",
-       "To Conquer the Kraken", "Snakebite", "The Tempest", "In Darkest Night", "Spooky Packet"],
+       "To Conquer the Kraken", "Snakebite", "The Tempest", "In Darkest Night", "Christmas Play Pack"],
       `${dayKey}|8|order|oct8`
     ),
     "Song Randomizer"
