@@ -113,7 +113,7 @@ function buildDailyLists(dayKey) {
     "Master Note", "Beginner Pack",
     ...shuffledForDay(
       ["Jester Dance", "Alpha Squadron", "Mechanical Monsters",
-       "To Conquer the Kraken", "Snakebite", "The Tempest", "In Darkest Night", "Christmas Play Pack"],
+       "To Conquer the Kraken", "Snakebite", "The Tempest", "In Darkest Night", "Valiance", "Harrowgate Festival", "Christmas Play Pack"],
       `${dayKey}|8|order|oct8`
     ),
     "Song Randomizer"
