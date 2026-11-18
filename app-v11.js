@@ -88,7 +88,6 @@ function buildDailyLists(dayKey) {
   // Keep the familiar opening routine, rotate the music daily.
   const sixth = [
     "Master Note",
-    "Beginner Pack",
     ...shuffledForDay(
       ["Power", "Dragon Slayer", "Alpha Squadron", "Jester Dance", "Mechanical Monsters", "The Tempest", "Midnight Madness", "Christmas Play Pack", "Shine", "Snakebite"],
       `${dayKey}|6|music|oct8`
@@ -104,13 +103,13 @@ function buildDailyLists(dayKey) {
     `${dayKey}|7|mastered|oct8`
   );
   const seventh = [
-    "Master Note", "Beginner", "Band Warm-Ups",
+    "Master Note", "Band Warm-Ups",
     ...shuffledForDay([...seventhFocus, seventhRandom].filter(Boolean), `${dayKey}|7|order|oct8`),
     "Song Randomizer"
   ];
 
   const eighth = [
-    "Master Note", "Beginner Pack",
+    "Master Note",
     ...shuffledForDay(
       ["Jester Dance", "Alpha Squadron", "Mechanical Monsters",
        "To Conquer the Kraken", "Snakebite", "The Tempest", "In Darkest Night", "Valiance", "Harrowgate Festival", "Christmas Play Pack"],
