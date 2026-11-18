@@ -96,7 +96,7 @@ function buildDailyLists(dayKey) {
 
   const seventhFocus = [
     "Snakebite", "Valiance",
-    "Harrowgate Festival", "Sleigh Ride", "The Tempest", "In Darkest Night", "Christmas Play Pack"
+    "Harrowgate Festival", "Sleigh Ride", "Attack of the Rubber Chickens", "The Tempest", "In Darkest Night", "Christmas Play Pack"
   ];
   const seventhRandom = pickForDay(
     masteredPool([...seventhFocus, "Band Warm-Ups"]),
