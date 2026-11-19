@@ -532,7 +532,7 @@
   const controls = document.createElement('div');
   controls.className = 'band-cue-controls';
   controls.setAttribute('aria-label', 'Rehearsal conducting cues');
-  controls.innerHTML = '<button type="button" data-band-cue="up" title="Keyboard U">U · HORNS UP</button><button type="button" data-band-cue="hold" title="Keyboard H">H · HOLD</button><button type="button" data-band-cue="down" title="Keyboard D">D · HORNS DOWN</button>';
+  controls.innerHTML = '<button type="button" data-band-cue="up" title="Keyboard U">U · PLAYING POSITION</button><button type="button" data-band-cue="hold" title="Keyboard H">H · HOLD THE FINISH</button><button type="button" data-band-cue="down" title="Keyboard D">D · AT EASE</button>';
   list.before(controls);
   const flash = document.createElement('div');
   flash.id = 'band-cue-flash';
@@ -541,9 +541,9 @@
   flash.setAttribute('aria-atomic','true');
   document.body.appendChild(flash);
   const cues = {
-    up: { label:'HORNS UP!', sub:'READY TO PLAY', icon:'🎺' },
-    hold: { label:'HOLD!', sub:'EYES ON CONDUCTOR', icon:'✋' },
-    down: { label:'HORNS DOWN', sub:'REST & LISTEN', icon:'🎺' }
+    up: { label:'PLAYING POSITION!', sub:'PREPARE FOR THE DOWNBEAT', icon:'🎺' },
+    hold: { label:'HOLD THE FINISH!', sub:'INSTRUMENTS UP · EYES ON CONDUCTOR', icon:'✋' },
+    down: { label:'AT EASE!', sub:'CONDUCTOR RELEASES THE BAND', icon:'🎺' }
   };
   let timeout;
   function showCue(type) {
