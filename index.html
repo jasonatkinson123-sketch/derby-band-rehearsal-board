@@ -396,7 +396,7 @@
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/seat-announcement.js?v=20261008-1"></script>
 <script>
   (() => {
-    const cue = document.getElementById("stop-playing-cue");
+    // Place STOP and its dialog directly under body to escape the seasonal main stacking context.\n    document.body.appendChild(document.getElementById("stop-playing-cue"));\n    document.body.appendChild(document.getElementById("stop-playing-dialog"));\n    const cue = document.getElementById("stop-playing-cue");
     const dialog = document.getElementById("stop-playing-dialog");
     const close = document.getElementById("stop-playing-close");
     let lastFocused = null;
