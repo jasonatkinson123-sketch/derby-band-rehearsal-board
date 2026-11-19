@@ -516,7 +516,8 @@
   .band-cue-controls button:focus-visible { outline:3px solid #ff5d8f; outline-offset:3px; }
   body > #band-cue-flash { position:fixed !important; inset:0 !important; width:100vw !important; height:100vh !important; z-index:2147483646 !important; display:flex !important; flex-direction:column; justify-content:center; align-items:center; text-align:center; pointer-events:none; opacity:0; visibility:hidden; transition:opacity .16s ease,visibility .16s; padding:24px; box-sizing:border-box; }
   body > #band-cue-flash.visible { opacity:1 !important; visibility:visible !important; display:flex !important; }
-  #band-cue-flash .band-cue-icon { font-size:clamp(100px,18vw,230px); line-height:1.1; filter:drop-shadow(8px 9px 0 rgba(0,0,0,.15)); margin-bottom:18px; }\n  #band-cue-flash .band-cue-inner { font:900 clamp(25px,6vw,82px)/1.45 "Press Start 2P",monospace; text-shadow:4px 5px 0 rgba(0,0,0,.2); letter-spacing:.02em; }
+  #band-cue-flash .band-cue-icon { font-size:clamp(100px,18vw,230px); line-height:1.1; filter:drop-shadow(8px 9px 0 rgba(0,0,0,.15)); margin-bottom:18px; }
+  #band-cue-flash .band-cue-inner { font:900 clamp(25px,6vw,82px)/1.45 "Press Start 2P",monospace; text-shadow:4px 5px 0 rgba(0,0,0,.2); letter-spacing:.02em; }
   #band-cue-flash .band-cue-sub { font:700 clamp(12px,1.8vw,24px)/1.8 "Press Start 2P",monospace; margin-top:24px; }
   body > #band-cue-flash.up { background:#e9b82e; color:#17213a; }
   body > #band-cue-flash.hold { background:#202a52; color:#ffe38b; }
@@ -549,10 +550,14 @@
     if (gradeOverlay.hidden || !cues[type]) return;
     clearTimeout(timeout);
     flash.className = type;
-    flash.innerHTML = '<div><div class="band-cue-icon" aria-hidden="true"></div><div class="band-cue-inner"></div><div class="band-cue-sub"></div></div>';\n    flash.querySelector('.band-cue-icon').textContent = cues[type].icon;
+    flash.innerHTML = '<div><div class="band-cue-icon" aria-hidden="true"></div><div class="band-cue-inner"></div><div class="band-cue-sub"></div></div>';
+    flash.querySelector('.band-cue-icon').textContent = cues[type].icon;
     flash.querySelector('.band-cue-inner').textContent = cues[type].label;
     flash.querySelector('.band-cue-sub').textContent = cues[type].sub;
-    flash.classList.add('visible');\n    flash.style.setProperty('display','flex','important');\n    flash.style.setProperty('visibility','visible','important');\n    flash.style.setProperty('opacity','1','important');
+    flash.classList.add('visible');
+    flash.style.setProperty('display','flex','important');
+    flash.style.setProperty('visibility','visible','important');
+    flash.style.setProperty('opacity','1','important');
     timeout = setTimeout(() => { flash.classList.remove('visible'); flash.style.removeProperty('visibility'); flash.style.removeProperty('opacity'); }, 4500);
   }
   controls.addEventListener('click', event => {
