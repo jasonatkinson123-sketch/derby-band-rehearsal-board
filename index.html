@@ -514,9 +514,9 @@
   .band-cue-controls { display:flex; justify-content:space-between; gap:8px; margin:8px 0 12px; flex-wrap:wrap; }
   .band-cue-controls button { font:700 clamp(8px,1vw,11px) "Press Start 2P",monospace; border:2px solid #17213a; border-radius:3px; background:#f7e6a5; color:#17213a; padding:10px 12px; cursor:pointer; box-shadow:2px 2px 0 #17213a; }
   .band-cue-controls button:focus-visible { outline:3px solid #ff5d8f; outline-offset:3px; }
-  #band-cue-flash { position:fixed; inset:0; z-index:2147483640; display:grid; place-items:center; text-align:center; pointer-events:none; opacity:0; visibility:hidden; transition:opacity .16s ease,visibility .16s; padding:24px; box-sizing:border-box; }
+  #band-cue-flash { position:fixed !important; inset:0 !important; width:100vw !important; height:100vh !important; z-index:2147483646 !important; display:flex !important; flex-direction:column; justify-content:center; align-items:center; text-align:center; pointer-events:none; opacity:0; visibility:hidden; transition:opacity .16s ease,visibility .16s; padding:24px; box-sizing:border-box; }
   #band-cue-flash.visible { opacity:1; visibility:visible; }
-  #band-cue-flash .band-cue-inner { font:900 clamp(25px,6vw,82px)/1.45 "Press Start 2P",monospace; text-shadow:4px 5px 0 rgba(0,0,0,.2); letter-spacing:.02em; }
+  #band-cue-flash .band-cue-icon { font-size:clamp(100px,18vw,230px); line-height:1.1; filter:drop-shadow(8px 9px 0 rgba(0,0,0,.15)); margin-bottom:18px; }\n  #band-cue-flash .band-cue-inner { font:900 clamp(25px,6vw,82px)/1.45 "Press Start 2P",monospace; text-shadow:4px 5px 0 rgba(0,0,0,.2); letter-spacing:.02em; }
   #band-cue-flash .band-cue-sub { font:700 clamp(12px,1.8vw,24px)/1.8 "Press Start 2P",monospace; margin-top:24px; }
   #band-cue-flash.up { background:#e9b82e; color:#17213a; }
   #band-cue-flash.hold { background:#202a52; color:#ffe38b; }
@@ -540,20 +540,20 @@
   flash.setAttribute('aria-atomic','true');
   document.body.appendChild(flash);
   const cues = {
-    up: { label:'HORNS UP!', sub:'READY TO PLAY' },
-    hold: { label:'HOLD!', sub:'EYES ON CONDUCTOR' },
-    down: { label:'HORNS DOWN', sub:'REST & LISTEN' }
+    up: { label:'HORNS UP!', sub:'READY TO PLAY', icon:'🎺' },
+    hold: { label:'HOLD!', sub:'EYES ON CONDUCTOR', icon:'✋' },
+    down: { label:'HORNS DOWN', sub:'REST & LISTEN', icon:'🎺' }
   };
   let timeout;
   function showCue(type) {
     if (gradeOverlay.hidden || !cues[type] || !document.getElementById('stop-playing-dialog').hidden) return;
     clearTimeout(timeout);
     flash.className = type;
-    flash.innerHTML = '<div><div class="band-cue-inner"></div><div class="band-cue-sub"></div></div>';
+    flash.innerHTML = '<div><div class="band-cue-icon" aria-hidden="true"></div><div class="band-cue-inner"></div><div class="band-cue-sub"></div></div>';\n    flash.querySelector('.band-cue-icon').textContent = cues[type].icon;
     flash.querySelector('.band-cue-inner').textContent = cues[type].label;
     flash.querySelector('.band-cue-sub').textContent = cues[type].sub;
-    flash.classList.add('visible');
-    timeout = setTimeout(() => { flash.classList.remove('visible'); }, 2500);
+    flash.classList.add('visible');\n    flash.style.setProperty('display','flex','important');\n    flash.style.setProperty('visibility','visible','important');\n    flash.style.setProperty('opacity','1','important');
+    timeout = setTimeout(() => { flash.classList.remove('visible'); flash.style.removeProperty('visibility'); flash.style.removeProperty('opacity'); }, 2500);
   }
   controls.addEventListener('click', event => {
     const button = event.target.closest('[data-band-cue]');
