@@ -213,7 +213,7 @@
   <style>
 
   .horn-cues { display:flex; justify-content:space-between; gap:12px; padding:8px 16px; position:relative; z-index:5; }\n  .horn-cues button { background:#ffd447; color:#11172f; border:3px solid #11172f; box-shadow:3px 3px 0 #111; padding:9px 12px; font:700 clamp(8px,1vw,12px) "Press Start 2P",monospace; cursor:pointer; }\n  .horn-cues button:active { transform:translate(2px,2px); box-shadow:1px 1px 0 #111; }\n  .horn-cues button:focus-visible { outline:3px solid #ff5d8f; outline-offset:3px; }\n  .stop-playing-cue {
-    position: fixed; left: 12px; bottom: 282px; z-index: 2147483502;
+    position: fixed; left: 12px; top: 110px; bottom: auto; z-index: 2147483502;
     width: 114px; min-height: 40px; padding: 8px 9px; cursor: pointer;
     background: #d72032; color: #fff; border: 3px solid #fff;
     box-shadow: 4px 4px 0 #111;
@@ -245,7 +245,7 @@
     font: bold 34px/1 Arial, sans-serif; cursor: pointer;
   }
   @media (max-width: 600px) {
-    .stop-playing-cue { width: 114px; font-size: 10px; }
+    .stop-playing-cue { width: 94px; font-size: 9px; top: 78px; left: 8px; }
     .stop-playing-panel { min-height: 78vh; }
     .stop-playing-panel h2 { font-size: clamp(15px, 4.1vw, 25px); line-height: 1.65; }
   }
