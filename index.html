@@ -514,13 +514,13 @@
   .band-cue-controls { display:flex; justify-content:space-between; gap:8px; margin:8px 0 12px; flex-wrap:wrap; }
   .band-cue-controls button { font:700 clamp(8px,1vw,11px) "Press Start 2P",monospace; border:2px solid #17213a; border-radius:3px; background:#f7e6a5; color:#17213a; padding:10px 12px; cursor:pointer; box-shadow:2px 2px 0 #17213a; }
   .band-cue-controls button:focus-visible { outline:3px solid #ff5d8f; outline-offset:3px; }
-  #band-cue-flash { position:fixed !important; inset:0 !important; width:100vw !important; height:100vh !important; z-index:2147483646 !important; display:flex !important; flex-direction:column; justify-content:center; align-items:center; text-align:center; pointer-events:none; opacity:0; visibility:hidden; transition:opacity .16s ease,visibility .16s; padding:24px; box-sizing:border-box; }
-  #grade-overlay #band-cue-flash.visible { opacity:1 !important; visibility:visible !important; display:flex !important; }
+  body > #band-cue-flash { position:fixed !important; inset:0 !important; width:100vw !important; height:100vh !important; z-index:2147483646 !important; display:flex !important; flex-direction:column; justify-content:center; align-items:center; text-align:center; pointer-events:none; opacity:0; visibility:hidden; transition:opacity .16s ease,visibility .16s; padding:24px; box-sizing:border-box; }
+  body > #band-cue-flash.visible { opacity:1 !important; visibility:visible !important; display:flex !important; }
   #band-cue-flash .band-cue-icon { font-size:clamp(100px,18vw,230px); line-height:1.1; filter:drop-shadow(8px 9px 0 rgba(0,0,0,.15)); margin-bottom:18px; }\n  #band-cue-flash .band-cue-inner { font:900 clamp(25px,6vw,82px)/1.45 "Press Start 2P",monospace; text-shadow:4px 5px 0 rgba(0,0,0,.2); letter-spacing:.02em; }
   #band-cue-flash .band-cue-sub { font:700 clamp(12px,1.8vw,24px)/1.8 "Press Start 2P",monospace; margin-top:24px; }
-  #band-cue-flash.up { background:#e9b82e; color:#17213a; }
-  #band-cue-flash.hold { background:#202a52; color:#ffe38b; }
-  #band-cue-flash.down { background:#78c7e7; color:#17213a; }
+  body > #band-cue-flash.up { background:#e9b82e; color:#17213a; }
+  body > #band-cue-flash.hold { background:#202a52; color:#ffe38b; }
+  body > #band-cue-flash.down { background:#78c7e7; color:#17213a; }
   @media (prefers-reduced-motion:reduce) { #band-cue-flash { transition:none; } }
 </style>
 <script>
@@ -538,7 +538,7 @@
   flash.setAttribute('role','status');
   flash.setAttribute('aria-live','polite');
   flash.setAttribute('aria-atomic','true');
-  gradeOverlay.appendChild(flash);
+  document.body.appendChild(flash);
   const cues = {
     up: { label:'HORNS UP!', sub:'READY TO PLAY', icon:'🎺' },
     hold: { label:'HOLD!', sub:'EYES ON CONDUCTOR', icon:'✋' },
