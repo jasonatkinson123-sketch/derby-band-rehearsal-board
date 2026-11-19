@@ -171,7 +171,7 @@
             <h2 id="grade-overlay-title">GRADE BAND</h2>
           </div>
         </header>
-        <ol class="grade-overlay-list" id="grade-overlay-list"></ol>
+        <div class="horn-cues" aria-label="Instrument position cues"><button type="button" id="horns-up">HORNS UP</button><button type="button" id="horns-down">HORNS DOWN</button></div><ol class="grade-overlay-list" id="grade-overlay-list"></ol>
         <div class="grade-overlay-empty" id="grade-overlay-empty" hidden aria-hidden="true"></div>
       </div>
     </div>
@@ -212,7 +212,7 @@
 
   <style>
 
-  .stop-playing-cue {
+  .horn-cues { display:flex; justify-content:space-between; gap:12px; padding:8px 16px; position:relative; z-index:5; }\n  .horn-cues button { background:#ffd447; color:#11172f; border:3px solid #11172f; box-shadow:3px 3px 0 #111; padding:9px 12px; font:700 clamp(8px,1vw,12px) "Press Start 2P",monospace; cursor:pointer; }\n  .horn-cues button:active { transform:translate(2px,2px); box-shadow:1px 1px 0 #111; }\n  .horn-cues button:focus-visible { outline:3px solid #ff5d8f; outline-offset:3px; }\n  .stop-playing-cue {
     position: fixed; left: 12px; bottom: 282px; z-index: 2147483502;
     width: 114px; min-height: 40px; padding: 8px 9px; cursor: pointer;
     background: #d72032; color: #fff; border: 3px solid #fff;
@@ -387,7 +387,7 @@
     });
   })();
 </script>
-  <script src="app-v11.js?v=20261117-seventh-sleigh-ride"></script>
+  <script src="app-v11.js?v=20261117-seventh-sleigh-ride"></script>\n  <script>\n    (() => {\n      const overlay = document.getElementById("grade-overlay");\n      const list = document.getElementById("grade-overlay-list");\n      const buttons = document.querySelector(".horn-cues");\n      const original = document.createElement("div");\n      original.className = "horn-cue-message";\n      original.setAttribute("role", "status");\n      original.setAttribute("aria-live", "polite");\n      original.hidden = true;\n      buttons.insertAdjacentElement("afterend", original);\n      const style = document.createElement("style");\n      style.textContent = ".horn-cue-message{font:700 clamp(20px,5vw,64px)/1.4 \\"Press Start 2P\\",monospace;text-align:center;padding:20px;color:#11172f;background:#ffd447;border:5px solid #11172f;margin:12px;} .horn-cue-message[hidden]{display:none}";\n      document.head.appendChild(style);\n      function showCue(message) { original.textContent = message; original.hidden = false; list.style.display = "none"; }\n      document.getElementById("horns-up").addEventListener("click", () => showCue("HORNS UP!"));\n      document.getElementById("horns-down").addEventListener("click", () => showCue("HORNS DOWN!"));\n      const observer = new MutationObserver(() => { if (overlay.hidden) { original.hidden = true; list.style.display = ""; } });\n      observer.observe(overlay, {attributes:true, attributeFilter:["hidden"]});\n      list.addEventListener("click", () => { original.hidden = true; list.style.display = ""; });\n      buttons.addEventListener("dblclick", () => { original.hidden = true; list.style.display = ""; });\n    })();\n  </script>
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/rewards-config.js?v=20261005-requests-1"></script>
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/class-clock.js?v=20261019-finish-45-1"></script>
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/band-bell.js?v=20261019-finish-45-1"></script>
