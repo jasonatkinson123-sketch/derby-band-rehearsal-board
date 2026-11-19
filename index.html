@@ -162,7 +162,7 @@
     </section>
 
     <div class="grade-overlay" id="grade-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="grade-overlay-title">
-      <button class="routine-close" id="grade-close" type="button" aria-label="Close enlarged rehearsal">×</button>
+      <button type="button" id="grade-stop-cue" aria-label="Stop playing reminder">STOP</button>\n      <button class="routine-close" id="grade-close" type="button" aria-label="Close enlarged rehearsal">×</button>
       <div class="grade-overlay-content">
         <header class="grade-overlay-header">
           <span class="grade-overlay-number" id="grade-overlay-number">6</span>
@@ -212,7 +212,7 @@
 
   <style>
 
-  .horn-cues { display:flex; justify-content:space-between; gap:12px; padding:8px 16px; position:relative; z-index:5; }\n  .horn-cues button { background:#ffd447; color:#11172f; border:3px solid #11172f; box-shadow:3px 3px 0 #111; padding:9px 12px; font:700 clamp(8px,1vw,12px) "Press Start 2P",monospace; cursor:pointer; }\n  .horn-cues button:active { transform:translate(2px,2px); box-shadow:1px 1px 0 #111; }\n  .horn-cues button:focus-visible { outline:3px solid #ff5d8f; outline-offset:3px; }\n  .stop-playing-cue {
+  #grade-stop-cue { position:fixed; left:12px; top:clamp(6rem,22vh,13rem); z-index:2147483600; background:#d72032; color:white; border:3px solid white; box-shadow:4px 4px 0 #111; padding:12px 18px; font:900 12px "Press Start 2P",monospace; cursor:pointer; }\n  #grade-stop-cue:focus-visible { outline:4px solid #ffd447; outline-offset:3px; }\n  .horn-cues { display:flex; justify-content:space-between; gap:12px; padding:8px 16px; position:relative; z-index:5; }\n  .horn-cues button { background:#ffd447; color:#11172f; border:3px solid #11172f; box-shadow:3px 3px 0 #111; padding:9px 12px; font:700 clamp(8px,1vw,12px) "Press Start 2P",monospace; cursor:pointer; }\n  .horn-cues button:active { transform:translate(2px,2px); box-shadow:1px 1px 0 #111; }\n  .horn-cues button:focus-visible { outline:3px solid #ff5d8f; outline-offset:3px; }\n  .stop-playing-cue {
     position: fixed; left: 12px; top: 110px; bottom: auto; z-index: 2147483502;
     width: 114px; min-height: 40px; padding: 8px 9px; cursor: pointer;
     background: #d72032; color: #fff; border: 3px solid #fff;
@@ -396,7 +396,7 @@
   <script src="https://jasonatkinson123-sketch.github.io/band-tools-dashboard/seat-announcement.js?v=20261008-1"></script>
 <script>
   (() => {
-    // Place STOP and its dialog directly under body to escape the seasonal main stacking context.\n    document.body.appendChild(document.getElementById("stop-playing-cue"));\n    document.body.appendChild(document.getElementById("stop-playing-dialog"));\n    const cue = document.getElementById("stop-playing-cue");
+    // Place STOP and its dialog directly under body to escape the seasonal main stacking context.\n    document.body.appendChild(document.getElementById("stop-playing-cue"));\n    document.body.appendChild(document.getElementById("stop-playing-dialog"));\n    const cue = document.getElementById("stop-playing-cue");\n    document.getElementById("grade-stop-cue").addEventListener("click", () => cue.click());
     const dialog = document.getElementById("stop-playing-dialog");
     const close = document.getElementById("stop-playing-close");
     let lastFocused = null;
