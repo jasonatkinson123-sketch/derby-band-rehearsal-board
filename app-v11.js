@@ -89,7 +89,7 @@ function buildDailyLists(dayKey) {
   const sixth = [
     "Master Note",
     ...shuffledForDay(
-      ["Power", "Dragon Slayer", "Alpha Squadron", "Jester Dance", "Mechanical Monsters", "The Tempest", "Midnight Madness", "Christmas Play Pack", "Shine", "Snakebite"],
+      ["Power", "Dragon Slayer", "Alpha Squadron", "Jester Dance", "Mechanical Monsters", "The Tempest", "Midnight Madness", "Christmas Play Pack", "Shine", "Snakebite", "Falcon's Flight March"],
       `${dayKey}|6|music|oct8`
     )
   ];
